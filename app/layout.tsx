@@ -4,20 +4,10 @@ import "./globals.css";
 import Navbar from "./navbar";
 import Footer from "./Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
 const rethink = Rethink_Sans({
   variable: "--font-rethink-sans",
   subsets: ["latin"],
   display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -37,9 +27,7 @@ export default function RootLayout({
           className={`${rethink.className} antialiased gap-y-12 tracking-tight text-white bg-zinc-950`}
         >
           <Navbar />
-
           <main>{children}</main>
-
           <Footer />
         </body>
       </html>

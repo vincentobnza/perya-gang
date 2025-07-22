@@ -7,8 +7,12 @@
   display: none;
 }
 
-.primary-color {
+.bg-main {
   background-color: #bdfc06;
+}
+
+.text-primary {
+  color: #bdfc06;
 }
 
 @theme inline {

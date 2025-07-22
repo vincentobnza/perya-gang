@@ -1,12 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { User } from "lucide-react";
+import NavbarBtns from "@/components/NavbarBtns";
+import { h1 } from "motion/react-client";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Navbar() {
-  const isLoggedIn = false;
+  const isAuthenticated = true; // This should be replaced with actual authentication logic
+  const user = "John Layda";
   return (
-    <nav className="w-full h-24 grid place-items-center border-b border-zinc-800">
+    <nav className="w-full h-24 grid place-items-center border-b border-zinc-900">
       <div className="w-full max-w-md md:max-w-screen-xl mx-auto  flex justify-between items-center">
         <Link href="/">
           <Image
@@ -17,20 +18,11 @@ export default function Navbar() {
           />
         </Link>
 
+        {isAuthenticated && (
+          <h1 className="text-sm md:text-lg lg:text-xl">Hello {user}!</h1>
+        )}
         {/* login */}
-
-        <div className="flex items-center space-x-2">
-          <Button
-            variant="ghost"
-            className="uppercase text-md font-black text-[#BDFC06]"
-          >
-            {!isLoggedIn ? "REGISTER" : "LOGIN"}
-          </Button>
-
-          <Button size="icon">
-            <User className="size-5" />
-          </Button>
-        </div>
+        <NavbarBtns isAuthenticated={isAuthenticated} />
       </div>
     </nav>
   );
