@@ -9,6 +9,7 @@ type GiveAwayCardProps = {
   endTime?: string;
   cashGiveAways?: string;
   entryRequirements?: string;
+  isJoined?: boolean;
 };
 
 export default function GiveAwayCard({

@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,11 +11,21 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { TvMinimalPlay, MousePointerClick, UserPlus, Gift } from "lucide-react";
+import { useState } from "react";
+import { JoinSuccess } from "./JoinSuccess";
 
 export function RaffleMechanicsModal() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleJoinRaffle = () => {
+    setIsOpen(false);
+    setShowSuccess(true);
+  };
+
   return (
-    <Dialog>
-      <form>
+    <div>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button className="bg-[#bdfc06] text-black text-md font-bold">
             Join Raffle
@@ -21,10 +33,10 @@ export function RaffleMechanicsModal() {
         </DialogTrigger>
         <DialogContent className="sm:max-w-xl bg-zinc-900 border-none">
           <DialogHeader>
-            <DialogTitle className="text-primary text-xl">
+            <DialogTitle className="text-left text-primary text-xl">
               Raffle Mechanics
             </DialogTitle>
-            <DialogDescription className="text-sm">
+            <DialogDescription className="text-left text-sm">
               Earn points every time you watch streams, send messages
               <br /> and join giveaways.
             </DialogDescription>
@@ -44,13 +56,18 @@ export function RaffleMechanicsModal() {
             </div>
           </DialogHeader>
           <DialogFooter>
-            <Button className="w-full h-12 text-black text-lg bg-main">
+            <Button
+              className="w-full h-12 text-black text-lg bg-main"
+              onClick={handleJoinRaffle}
+            >
               Join Raffle
             </Button>
           </DialogFooter>
         </DialogContent>
-      </form>
-    </Dialog>
+      </Dialog>
+
+      <JoinSuccess isOpen={showSuccess} onClose={() => setShowSuccess(false)} />
+    </div>
   );
 }
 
@@ -80,13 +97,15 @@ const Mechanics = [
 
 const Card = ({ title, description, icon: Icon }: any) => {
   return (
-    <div className="flex items-start gap-4 p-3 bg-zinc-800/50 border border-zinc-800 rounded-lg shadow-xl">
+    <div className="flex items-start justify-start gap-4 p-3 bg-zinc-800/50 border border-zinc-800 rounded-lg shadow-xl">
       <div className="p-2 rounded-full bg-blue-700 text-white">
         <Icon className="size-4" />
       </div>
       <div>
-        <h3 className="text-md font-semibold text-zinc-200 mb-1">{title}</h3>
-        <p className="text-sm text-zinc-500">{description}</p>
+        <h3 className="text-md font-semibold text-left text-zinc-200 mb-1">
+          {title}
+        </h3>
+        <p className="text-sm text-zinc-500 text-left">{description}</p>
       </div>
     </div>
   );

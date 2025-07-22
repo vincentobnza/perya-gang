@@ -68,7 +68,7 @@ type CardProps = {
     bgColor?: string;
     isNot?: boolean;
     iconBg: string;
-    isBackground?: boolean;
+    isBackground?: string;
   };
 };
 

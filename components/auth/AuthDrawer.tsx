@@ -25,7 +25,7 @@ export function AuthDrawer() {
         </Button>
       </DrawerTrigger>
       <DrawerContent className="bg-zinc-950 border-none min-h-screen">
-        <div className="mx-auto w-full max-w-screen-md p-8 flex flex-col justify-start items-start text-left">
+        <div className="mx-auto w-full max-w-screen-md p-8 flex flex-col justify-start items-start text-left overflow-y-scroll">
           <DrawerHeader>
             <DrawerTitle className="text-4xl text-left font-bold text-[#BDFC06] mb-4">
               Create your Account

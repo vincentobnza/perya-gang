@@ -1,8 +1,10 @@
+import { RaffleScrollModal } from "@/app/portal/components/RaffleScrollModal";
 import React from "react";
 
 export default function StreamingVideo() {
   return (
     <div className="w-full min-h-[80vh] bg-zinc-900/20 relative">
+      <RaffleScrollModal />
       {/* SAMPLE VIDEO */}
       <iframe
         className="absolute inset-0 w-full h-full"

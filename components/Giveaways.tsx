@@ -55,7 +55,7 @@ const GiveawayCards = ({ card }: CardProps) => {
       <img
         src={card.image}
         alt="image"
-        className="size-40 absolute -bottom-8 right-0"
+        className="size-30 md:size-40 absolute -bottom-8 right-0"
       />
     </div>
   );
