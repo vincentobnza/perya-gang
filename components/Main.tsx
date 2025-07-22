@@ -15,7 +15,7 @@ export default function Main() {
         description="Follow these steps to join and win exciting giveaways!"
       />
 
-      <div className="w-full grid md:grid-cols-3 mt-12 md:p-10 lg:p-20 gap-4">
+      <div className="w-full grid md:grid-cols-2  mt-12  gap-4">
         {cardInfo.map((card, idx) => (
           <Cards key={idx} card={card} />
         ))}

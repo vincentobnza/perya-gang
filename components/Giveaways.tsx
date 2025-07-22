@@ -11,7 +11,7 @@ export default function Giveaways() {
         description="Join our exclusive streamer giveaways and get the chance to win epic rewards from merch, supplements, to surprise loot drops!"
       />
 
-      <div className="w-full grid md:grid-cols-3 mt-12 md:p-10 lg:p-20 gap-4">
+      <div className="w-full grid md:grid-cols-3 mt-12  gap-4">
         {cardInfo.map((card, idx) => (
           <GiveawayCards key={idx} card={card} />
         ))}

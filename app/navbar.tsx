@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Navbar() {
   const isLoggedIn = false;
   return (
-    <div className="w-full h-24 grid place-items-center">
+    <nav className="w-full h-24 grid place-items-center border-b border-zinc-800">
       <div className="w-full max-w-md md:max-w-screen-xl mx-auto  flex justify-between items-center">
         <Link href="/">
           <Image
@@ -32,6 +32,6 @@ export default function Navbar() {
           </Button>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }

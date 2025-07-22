@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Rethink_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "./navbar";
+import Footer from "./Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,11 +34,13 @@ export default function RootLayout({
     <>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${rethink.className} antialiased space-y-12 tracking-tight text-white bg-zinc-950`}
+          className={`${rethink.className} antialiased gap-y-12 tracking-tight text-white bg-zinc-950`}
         >
           <Navbar />
 
           <main>{children}</main>
+
+          <Footer />
         </body>
       </html>
     </>
