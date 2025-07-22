@@ -54,14 +54,14 @@ export function LeaderboardTable() {
         <TableBody>
           {invoices.map((invoice, idx) => (
             <TableRow key={invoice.id}>
-              <TableCell className=" text-[#bdfc06] font-bold text-lg">
+              <TableCell className=" text-[#bdfc06] font-bold text-lg p-2">
                 # {idx + 1}
               </TableCell>
-              <TableCell>
+              <TableCell className=" p-2">
                 <h1 className="text-lg font-semibold">{invoice.name}</h1>
                 <p className="text-sm opacity-60">user@{invoice.id}</p>
               </TableCell>
-              <TableCell className="text-lg font-bold text-[#CC00FF]">
+              <TableCell className="text-lg font-bold text-[#CC00FF] p-2">
                 {invoice.user}
               </TableCell>
             </TableRow>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import { Eye, EyeClosed } from "lucide-react";
 
 type TextFieldProps = {
@@ -11,9 +11,11 @@ type TextFieldProps = {
   type?: string;
   className?: string;
   disabled?: boolean;
+  error?: string;
+  name?: string;
 };
 
-export default function TextField(props: TextFieldProps) {
+const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   return (
@@ -25,6 +27,8 @@ export default function TextField(props: TextFieldProps) {
       )}
       <div className="relative">
         <input
+          ref={ref}
+          name={props.name}
           type={
             props.type === "password"
               ? isPasswordVisible
@@ -39,7 +43,7 @@ export default function TextField(props: TextFieldProps) {
           disabled={props.disabled}
           className={`w-full min-w-0 bg-zinc-900 text-white rounded-lg p-3 h-14 focus:outline-none placeholder:text-sm focus:ring-2 focus:ring-[#BDFC06] ${
             props.type === "password" ? "pr-12" : ""
-          } ${props.className || ""}`}
+          }${props.className || ""}`}
         />
 
         {props.type === "password" && (
@@ -52,6 +56,13 @@ export default function TextField(props: TextFieldProps) {
           </button>
         )}
       </div>
+      {props.error && (
+        <span className="text-red-400/70 font-bold text-sm">{props.error}</span>
+      )}
     </div>
   );
-}
+});
+
+TextField.displayName = "TextField";
+
+export default TextField;

@@ -12,7 +12,6 @@ export default function Home() {
       <Main />
       <Giveaway />
       <Leaderboard />
-
       <Cta />
     </div>
   );
