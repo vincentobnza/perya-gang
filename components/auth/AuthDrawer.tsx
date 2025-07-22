@@ -26,19 +26,18 @@ export function AuthDrawer() {
           Get Started
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="bg-zinc-950 border-none min-h-screen">
-        <div className="mx-auto w-full max-w-screen-lg p-8 flex flex-col justify-start items-start text-left">
+      <DrawerContent className="bg-zinc-950 border-none min-h-screen ">
+        <div className="mx-auto w-full max-w-screen-md p-8 flex flex-col justify-start items-start text-left">
           <DrawerHeader>
             <DrawerTitle className="text-4xl text-left font-bold text-[#BDFC06] mb-4">
               Create your Account
             </DrawerTitle>
-            <p className="text-left w-full md:w-1/2 text-zinc-400">
+            <p className="text-left w-full  text-zinc-400">
               Register now to start unlocking GCash prizes, surprise loot, and
               exclusive giveaways — all while watching your favorite streamers.
             </p>
           </DrawerHeader>
-
-          <div className="p-3">
+          <div className="w-full p-3">
             <AuthTabs />
           </div>
           <div className="p-4 pb-0"></div>
