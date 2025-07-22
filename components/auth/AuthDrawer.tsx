@@ -6,15 +6,12 @@ import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { AuthTabs } from "./AuthTabs";
+import AccountDetails from "./AccountDetails";
 
 export function AuthDrawer() {
   return (
@@ -25,7 +22,7 @@ export function AuthDrawer() {
         </Button>
       </DrawerTrigger>
       <DrawerContent className="bg-zinc-950 border-none min-h-screen">
-        <div className="mx-auto w-full max-w-screen-md p-8 flex flex-col justify-start items-start text-left overflow-y-scroll">
+        <div className="mt-8 mx-auto w-full max-w-screen-md p-8 flex flex-col justify-start items-start text-left overflow-y-scroll">
           <DrawerHeader>
             <DrawerTitle className="text-4xl text-left font-bold text-[#BDFC06] mb-4">
               Create your Account
@@ -36,7 +33,7 @@ export function AuthDrawer() {
             </p>
           </DrawerHeader>
           <div className="w-full p-3">
-            <AuthTabs />
+            <AccountDetails />
           </div>
           <div className="p-4 pb-0"></div>
         </div>

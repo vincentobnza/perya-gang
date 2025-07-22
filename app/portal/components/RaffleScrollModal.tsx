@@ -2,13 +2,13 @@ import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 
 export function RaffleScrollModal() {
   return (
-    <Dialog open={false}>
+    <Dialog open={true}>
       <DialogContent className="sm:max-w-xl bg-zinc-900 border-none p-5 [&>button]:hidden rounded-lg">
         <DialogHeader className="text-center">
           {DUMP_DATA.map((item, index) => (
             <div
               key={index}
-              className="flex items-center gap-6 mb-1  p-3 rounded-lg"
+              className="flex items-center gap-6 mb-1  p-3 rounded-lg relative"
             >
               <img
                 src={item.avatarUrl}

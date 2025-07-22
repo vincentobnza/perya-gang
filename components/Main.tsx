@@ -57,6 +57,7 @@ const cardInfo = [
     icon: Gift,
     isBackground: "/APEX.png",
     bgColor: "bg-zinc-900",
+    iconBg: "bg-white/40",
   },
 ];
 
