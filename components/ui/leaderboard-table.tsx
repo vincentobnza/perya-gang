@@ -44,11 +44,15 @@ export function LeaderboardTable() {
         {/* TABLE CONTENT */}
         <TableHeader className="rounded-lg">
           <TableRow className="bg-[#CC00FF]">
-            <TableHead className="w-[100px] text-white font-bold">
+            <TableHead className="w-[100px] text-white font-bold p-4 text-md md:text-lg">
               RANK
             </TableHead>
-            <TableHead className="font-bold text-white">MEMBER</TableHead>
-            <TableHead className="font-bold text-white">USER</TableHead>
+            <TableHead className="font-bold text-white p-4 text-md md:text-lg">
+              MEMBER
+            </TableHead>
+            <TableHead className="font-bold text-white p-4 text-md md:text-lg">
+              USER
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

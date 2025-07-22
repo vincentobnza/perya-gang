@@ -11,7 +11,6 @@ export default function Leaderboard() {
         title="Grind. Get Rewarded."
         description="Join our exclusive streamer giveaways and get the chance to win epic rewards from merch, supplements, to surprise loot drops!"
       />
-
       <LeaderboardTable />
     </Wrapper>
   );

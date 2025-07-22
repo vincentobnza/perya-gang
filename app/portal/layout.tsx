@@ -7,7 +7,7 @@ export default function PortalLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full flex flex-col min-h-screen">
+    <div className="w-full flex flex-col min-h-auto">
       <main className="flex-1">{children}</main>
     </div>
   );

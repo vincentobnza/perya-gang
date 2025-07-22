@@ -12,7 +12,6 @@ import { AuthDrawer } from "./auth/AuthDrawer";
 export default function Hero() {
   const swiperRef = useRef<any>(null);
   const user = null;
-
   return (
     <div className="mt-24 w-full text-center items-center flex flex-col gap-4">
       {/* CAROUSEL */}
