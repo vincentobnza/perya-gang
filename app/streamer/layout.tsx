@@ -1,14 +1,9 @@
 import React from "react";
 
-export default function Layout() {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <h1 className="text-2xl font-bold text-center text-white">
-        Streamer Layout
-      </h1>
-      <p className="text-center text-gray-400 mt-4">
-        This is the layout for streamers. Customize it as needed.
-      </p>
-    </div>
+    <main className="max-w-screen-xl mx-auto p-8 flex justify-center items-center">
+      {children}
+    </main>
   );
 }

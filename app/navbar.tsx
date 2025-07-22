@@ -18,7 +18,7 @@ export default function Navbar() {
           />
         </Link>
 
-        {isAuthenticated && (
+        {!isAuthenticated && (
           <h1 className="text-sm md:text-lg lg:text-xl">Hello {user}!</h1>
         )}
         {/* login */}

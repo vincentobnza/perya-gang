@@ -2,6 +2,7 @@
 
 import React, { useState, forwardRef } from "react";
 import { Eye, EyeClosed } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type TextFieldProps = {
   label?: string;
@@ -45,7 +46,6 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
             props.type === "password" ? "pr-12" : ""
           }${props.className || ""}`}
         />
-
         {props.type === "password" && (
           <button
             onClick={() => setIsPasswordVisible(!isPasswordVisible)}

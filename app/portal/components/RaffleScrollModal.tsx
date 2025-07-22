@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 
 export function RaffleScrollModal() {
   return (
-    <Dialog open={true}>
+    <Dialog open={false}>
       <DialogContent className="sm:max-w-xl bg-zinc-900 border-none p-5 [&>button]:hidden rounded-lg">
         <DialogHeader className="text-center">
           {DUMP_DATA.map((item, index) => (
