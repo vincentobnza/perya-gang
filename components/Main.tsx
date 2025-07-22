@@ -14,7 +14,6 @@ export default function Main() {
         title="How to Participate in Giveaways"
         description="Follow these steps to join and win exciting giveaways!"
       />
-
       <div className="w-full grid md:grid-cols-2  mt-12  gap-4">
         {cardInfo.map((card, idx) => (
           <Cards key={idx} card={card} />
