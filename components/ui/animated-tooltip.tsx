@@ -8,9 +8,11 @@ import {
   useMotionValue,
   useSpring,
 } from "motion/react";
+import { cn } from "@/lib/utils";
 
 export const AnimatedTooltip = ({
   items,
+  size = "h-14 w-14",
 }: {
   items: {
     id: number;
@@ -18,6 +20,7 @@ export const AnimatedTooltip = ({
     designation: string;
     image: string;
   }[];
+  size?: string;
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const springConfig = { stiffness: 100, damping: 5 };
@@ -83,7 +86,10 @@ export const AnimatedTooltip = ({
             width={100}
             src={item.image}
             alt={item.name}
-            className="relative !m-0 h-14 w-14 rounded-full border-2 border-white/20 object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105"
+            className={cn(
+              "relative !m-0 rounded-full border-2 border-white/10 object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105",
+              size
+            )}
           />
         </div>
       ))}

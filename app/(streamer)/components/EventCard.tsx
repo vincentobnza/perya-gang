@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { Clock, Gift } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { ParticipantsTooltip } from "@/components/ui/participants-tooltip";
 
 type GiveAwayCardProps = {
   counting: number;
@@ -43,7 +44,7 @@ export default function EventCard({
       </div>
       <div className="p-5">
         {entryRequirements && (
-          <div className="w-full p-5 bg-zinc-800/70 rounded-lg border border-zinc-700/50 mb-8">
+          <div className="w-full p-5 bg-zinc-800/70 rounded-lg border border-zinc-700/50 mb-4">
             <h3 className="text-sm font-semibold">Entry Requirements</h3>
             <p className="text-sm text-zinc-300 mt-4">
               <span
@@ -57,6 +58,11 @@ export default function EventCard({
             </p>
           </div>
         )}
+
+        <div className="flex space-y-2 mb-8 flex-col">
+          <h1 className="text-md opacity-70 font-semibold">Participants</h1>
+          <ParticipantsTooltip size="size-8" />
+        </div>
         <div className="space-y-2">
           <div className="flex items-center gap-x-6">
             <div className="p-1.5  rounded-lg bg-zinc-800 text-zinc-300">
