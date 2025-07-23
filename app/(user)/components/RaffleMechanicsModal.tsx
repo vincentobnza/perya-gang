@@ -33,22 +33,30 @@ export function RaffleMechanicsModal() {
         </DialogTrigger>
         <DialogContent className="sm:max-w-xl bg-zinc-900 border-none">
           <DialogHeader>
-            <DialogTitle className="text-left text-primary text-xl">
+            <DialogTitle className="text-left text-xl text-main">
               Raffle Mechanics
             </DialogTitle>
             <DialogDescription className="text-left text-sm">
               Earn points every time you watch streams, send messages
               <br /> and join giveaways.
             </DialogDescription>
-            <div className="mt-4 w-full flex flex-col gap-3">
-              {Mechanics.map((item, index) => (
-                <Card
-                  key={index}
-                  title={item.title}
-                  description={item.description}
-                  icon={item.icon}
-                />
-              ))}
+            <div className="overflow-hidden max-h-[500px] overflow-y-auto">
+              <div className="mt-4 w-full flex flex-col gap-3">
+                {Mechanics.map((item, index) => (
+                  <Card
+                    key={index}
+                    title={item.title}
+                    description={item.description}
+                    icon={item.icon}
+                  />
+                ))}
+              </div>
+
+              <div className="mt-4 w-full flex flex-col gap-3">
+                <h1 className="text-left text-md opacity-70 font-semibold mb-5">
+                  Participants
+                </h1>
+              </div>
             </div>
 
             <div className="w-full flex items-center justify-center text-sm text-zinc-300 p-3  border-3 border-dashed border-zinc-800 rounded shadow-xl">

@@ -26,10 +26,10 @@ export function JoinSuccess({
           <div className="mx-auto mb-4 size-14 bg-main text-black rounded-full flex items-center justify-center">
             <Check className="w-8 h-8" />
           </div>
-          <DialogTitle className="text-2xl text-center">
+          <DialogTitle className="text-2xl mb-5 text-center">
             Successfully Joined!
           </DialogTitle>
-          <DialogDescription className="text-md text-zinc-400 text-center">
+          <DialogDescription className="text-md text-zinc-400 text-center font-medium">
             You are now qualified to <br /> entered the raffle!
           </DialogDescription>
         </DialogHeader>

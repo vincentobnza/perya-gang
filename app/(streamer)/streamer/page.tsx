@@ -3,6 +3,7 @@ import { DateSegmentControlTabs } from "../components/DateSegmentControlTabs";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Events from "../components/Events";
+import { CreateEvent } from "../components/CreateEvent";
 
 export default function Page({}) {
   const rewards = null; // This should be replaced with actual data fetching logic
@@ -10,17 +11,7 @@ export default function Page({}) {
     <div>
       <div className="w-full flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
         <DateSegmentControlTabs />
-        {rewards !== null ? (
-          ""
-        ) : (
-          <Button
-            size="lg"
-            className="bg-main rounded-full py-3 px-8 self-start md:self-auto"
-          >
-            Create Event
-            <Plus />
-          </Button>
-        )}
+        {rewards !== null ? "" : <CreateEvent />}
       </div>
       <main className="w-full min-h-[70vh] flex justify-center items-center">
         {/* IF NO REWARDS CREATED AND IF CREATED */}

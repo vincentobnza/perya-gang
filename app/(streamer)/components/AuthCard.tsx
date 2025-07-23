@@ -32,13 +32,14 @@ export default function AuthCard() {
        <>
         <form className="w-full max-w-lg p-3 md:p-8  rounded-lg flex items-center justify-center flex-col" onSubmit={onSubmit}>
           <h1 className="text-2xl font-medium mb-8">LOGIN</h1>
+          <div className="w-full flex flex-col gap-y-6">
           <TextField
             label="Email"
             type="email"
             name="login_email"
             placeholder="Enter your email"
-            className="mb-4 w-full border border-zinc-800"
-        />
+            className="w-full border border-zinc-800 focus:ring-blue-500"
+          />
         <TextField
           label="Password"
           type="password"
@@ -51,6 +52,7 @@ export default function AuthCard() {
             type="submit">
               SIGN IN
         </Button>
+       </div>
       </form>
     </>
   );

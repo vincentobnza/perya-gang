@@ -42,15 +42,17 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
           value={props.value}
           onChange={(e) => props.onChange?.(e.target.value)}
           disabled={props.disabled}
-          className={`w-full min-w-0 bg-zinc-900 text-white rounded-lg p-3 h-14 focus:outline-none placeholder:text-sm focus:ring-2 focus:ring-[#BDFC06] ${
-            props.type === "password" ? "pr-12" : ""
-          }${props.className || ""}`}
+          className={cn(
+            "w-full min-w-0 bg-zinc-900 text-white rounded-lg p-3 px-4 h-14 focus:outline-none placeholder:text-sm focus:ring-2 focus:ring-[#BDFC06]",
+            props.type === "password" ? "pr-12" : "",
+            props.className
+          )}
         />
         {props.type === "password" && (
           <button
             onClick={() => setIsPasswordVisible(!isPasswordVisible)}
             type="button"
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-zinc-500 hover:text-white focus:outline-none"
+            className="absolute right-3 top-0 bottom-0 flex items-center justify-center w-6 h-full text-zinc-500 hover:text-white focus:outline-none"
           >
             {isPasswordVisible ? <Eye /> : <EyeClosed />}
           </button>
