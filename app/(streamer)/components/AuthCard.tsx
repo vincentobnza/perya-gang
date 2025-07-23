@@ -1,6 +1,6 @@
 import TextField from "@/components/auth/TextField";
-import { Button } from "@/components/ui/button";
 import React from "react";
+import AuthButton from "./AuthButton";
 
 export default function AuthCard() {
   return (
@@ -18,7 +18,7 @@ export default function AuthCard() {
         placeholder="Enter your password"
         className="mb-4 w-full border border-zinc-800"
       />
-      <Button className="mt-8 w-full h-14 text-lg bg-blue-700">SIGN IN</Button>
+      <AuthButton />
     </div>
   );
 }

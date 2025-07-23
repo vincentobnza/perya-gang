@@ -26,7 +26,9 @@ export default function RootLayout({
           className={`${rethink.className} antialiased gap-y-12 tracking-tight text-white bg-zinc-950`}
         >
           <Navbar />
-          <main className="pb-10">{children}</main>
+          <main className="max-w-screen-xl mx-auto pb-130 py-5 md:py-8 lg:py-10">
+            {children}
+          </main>
         </body>
       </html>
     </>
