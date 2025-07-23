@@ -1,7 +1,9 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { Clock, Gift } from "lucide-react";
-import { RaffleSpinnerModal } from "./RaffleSpinner";
+import { useRouter } from "next/navigation";
 
 type GiveAwayCardProps = {
   counting: number;
@@ -19,6 +21,7 @@ export default function EventCard({
   cashGiveAways,
   entryRequirements,
 }: GiveAwayCardProps) {
+  const router = useRouter(); // Assuming you have a router instance available
   return (
     <div className="w-full rounded-2xl bg-zinc-900 border border-zinc-800 shadow-xl">
       <div className="w-full flex items-center justify-between p-5 border-b border-zinc-800">
@@ -28,7 +31,14 @@ export default function EventCard({
 
         <div className="flex items-center gap-2">
           <Button className="text-md font-bold bg-zinc-800">Edit</Button>
-          <RaffleSpinnerModal />
+          <Button
+            className="bg-[#bdfc06] text-black text-md font-bold"
+            onClick={() => {
+              router.push("/streamer/live"); // Assuming you have a router instance available
+            }}
+          >
+            Start
+          </Button>
         </div>
       </div>
       <div className="p-5">
