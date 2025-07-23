@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { Clock, Gift } from "lucide-react";
+import { RaffleSpinnerModal } from "./RaffleSpinner";
 
 type GiveAwayCardProps = {
   counting: number;
@@ -27,9 +28,7 @@ export default function EventCard({
 
         <div className="flex items-center gap-2">
           <Button className="text-md font-bold bg-zinc-800">Edit</Button>
-          <Button className="bg-[#bdfc06] text-black text-md font-bold">
-            Start
-          </Button>
+          <RaffleSpinnerModal />
         </div>
       </div>
       <div className="p-5">
