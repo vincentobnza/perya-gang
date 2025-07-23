@@ -20,7 +20,6 @@ export default function GiveAwaySchedule() {
     </div>
   );
 }
-
 const GiveAwayScheduleDumps = [
   {
     counting: 100,

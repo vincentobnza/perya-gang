@@ -2,25 +2,29 @@ import React from "react";
 import { DateSegmentControlTabs } from "../components/DateSegmentControlTabs";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import Events from "../components/Events";
 
 export default function Page({}) {
   const rewards = null; // This should be replaced with actual data fetching logic
   return (
     <div>
-      <div className="w-full flex justify-between items-center">
+      <div className="w-full flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
         <DateSegmentControlTabs />
         {rewards !== null ? (
-          <Button size="lg" className="bg-main rounded-full py-3 px-8">
+          ""
+        ) : (
+          <Button
+            size="lg"
+            className="bg-main rounded-full py-3 px-8 self-start md:self-auto"
+          >
             Create Event
             <Plus />
           </Button>
-        ) : (
-          ""
         )}
       </div>
       <main className="w-full min-h-[70vh] flex justify-center items-center">
         {/* IF NO REWARDS CREATED */}
-        {rewards === null && <NoRewardsCreated />}
+        {rewards !== null ? <NoRewardsCreated /> : <Events />}
       </main>
     </div>
   );

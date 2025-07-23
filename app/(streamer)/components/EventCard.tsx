@@ -24,9 +24,13 @@ export default function EventCard({
         <h4 className="text-sm font-medium text-zinc-400">
           {counting} And Counting!
         </h4>
-        <Button className="bg-[#bdfc06] text-black text-md font-bold">
-          Join Raffle
-        </Button>
+
+        <div className="flex items-center gap-2">
+          <Button className="text-md font-bold bg-zinc-800">Edit</Button>
+          <Button className="bg-[#bdfc06] text-black text-md font-bold">
+            Start
+          </Button>
+        </div>
       </div>
       <div className="p-5">
         {entryRequirements && (
