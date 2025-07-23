@@ -73,7 +73,6 @@ export function RaffleMechanicsModal() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
       <JoinSuccess isOpen={showSuccess} onClose={() => setShowSuccess(false)} />
     </div>
   );

@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
 import React from "react";
 import { Clock, Gift } from "lucide-react";
 import { RaffleMechanicsModal } from "./RaffleMechanicsModal";
 import { ParticipantsTooltip } from "@/components/ui/participants-tooltip";
+import { Separator } from "@/components/ui/separator";
 
 type GiveAwayCardProps = {
   counting: number;
@@ -32,7 +32,7 @@ export default function GiveAwayCard({
       <div className="p-5">
         {entryRequirements && (
           <div className="w-full p-5 bg-zinc-800/70 rounded-lg border border-zinc-700/50 mb-5">
-            <h3 className="text-sm font-semibold">Entry Requirements</h3>
+            <h3 className="text-sm font-medium">Entry Requirements</h3>
             <p className="text-sm text-zinc-300 mt-4">
               <span
                 dangerouslySetInnerHTML={{
@@ -46,9 +46,24 @@ export default function GiveAwayCard({
           </div>
         )}
 
-        <div className="flex space-y-2 mb-8 flex-col">
-          <h1 className="text-md opacity-70 font-semibold">Participants</h1>
-          <ParticipantsTooltip size="size-8" />
+        <div className="flex justify-center items-start space-y-2 mb-8 flex-col">
+          <h1 className="text-md opacity-70 font-medium">Participants</h1>
+          <div className="flex space-x-7">
+            <div>
+              <ParticipantsTooltip size="size-8" />
+            </div>
+            <div className="border-l-2 border-zinc-700 pl-3 flex items-center">
+              {counting > 100 ? (
+                <h3 className="text-lg font-semibold text-zinc-600">
+                  {counting} +
+                </h3>
+              ) : (
+                <h3 className="text-lg font-semibold text-zinc-600">
+                  {counting}
+                </h3>
+              )}
+            </div>
+          </div>
         </div>
 
         <div className="space-y-2">
