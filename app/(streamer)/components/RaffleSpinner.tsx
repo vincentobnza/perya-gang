@@ -26,13 +26,8 @@ export function RaffleSpinnerModal() {
             Raffle Spinners
           </DialogTitle>
         </DialogHeader>
-
         {/* RAFFLE  */}
-
         <Raffle />
-        <Button className="w-full rounded-full bg-main h-12">
-          Start Raffle
-        </Button>
         <RaffleParticipants />
         <DialogFooter></DialogFooter>
       </DialogContent>
@@ -42,20 +37,24 @@ export function RaffleSpinnerModal() {
 
 const Raffle = () => {
   const [selectedUser, setSelectedUser] = useState<number | null>(null);
-
   return (
-    <div className="w-3/4 mx-auto min-h-[200px] max-h-[250px] overflow-y-auto rounded-xl mb-5 relative">
-      {/* OVERLAY */}
-      {SAMPLE_USERS.map((user, index) => (
-        <UserCard
-          key={index}
-          name={user.name}
-          username={user.username}
-          avatarUrl={user.avatarUrl}
-          isSelected={selectedUser === index}
-          onClick={() => setSelectedUser(index)}
-        />
-      ))}
+    <div className="w-full max-w-sm mx-auto space-y-6 p-2">
+      <div className="w-full mx-auto min-h-[200px] max-h-[250px] overflow-y-auto rounded-xl mb-5 relative">
+        {/* OVERLAY */}
+        {SAMPLE_USERS.map((user, index) => (
+          <UserCard
+            key={index}
+            name={user.name}
+            username={user.username}
+            avatarUrl={user.avatarUrl}
+            isSelected={selectedUser === index}
+            onClick={() => setSelectedUser(index)}
+          />
+        ))}
+      </div>
+      <Button className="bg-main mx-auto w-full text-md" size="lg">
+        Start Raffle
+      </Button>
     </div>
   );
 };
