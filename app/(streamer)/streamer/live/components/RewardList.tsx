@@ -1,15 +1,30 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
+import RewardCard from "./RewardCard";
 
 export default function RewardList() {
   return (
     <div className="mt-8 w-full space-y-4">
       <Header />
-
-      <main></main>
+      <main className="w-full space-y-4">
+        {rewards.map((reward, index) => (
+          <RewardCard key={index} rewardName={reward} />
+        ))}
+      </main>
     </div>
   );
 }
+
+const rewards = [
+  "	₱5,000 GCash + Surprise Mystery Box",
+  "	₱5,000 GCash + Surprise Mystery Box",
+  "	₱5,000 GCash + Surprise Mystery Box",
+  "	₱5,000 GCash + Surprise Mystery Box",
+  "	₱5,000 GCash + Surprise Mystery Box",
+  "	₱5,000 GCash + Surprise Mystery Box",
+  "	₱5,000 GCash + Surprise Mystery Box",
+  "	₱5,000 GCash + Surprise Mystery Box",
+];
 
 const Header = () => {
   return (
