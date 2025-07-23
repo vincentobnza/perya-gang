@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Rethink_Sans } from "next/font/google";
 import "../globals.css";
 import Navbar from "../navbar";
 import Footer from "../Footer";
+import { ToastContainer } from "react-toastify";
 
 const rethink = Rethink_Sans({
   variable: "--font-rethink-sans",
@@ -26,6 +27,7 @@ export default function RootLayout({
         <body
           className={`${rethink.className} antialiased gap-y-12 tracking-tight text-white bg-zinc-950`}
         >
+          <ToastContainer />
           <Navbar />
           <main className="pb-10">{children}</main>
           <Footer />

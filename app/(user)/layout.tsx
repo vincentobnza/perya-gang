@@ -3,6 +3,7 @@ import Navbar from "../navbar";
 import "../globals.css";
 import { Rethink_Sans } from "next/font/google";
 import { Metadata } from "next";
+import { ToastContainer } from "react-toastify";
 
 const rethink = Rethink_Sans({
   variable: "--font-rethink-sans",
@@ -25,6 +26,7 @@ export default function RootLayout({
         <body
           className={`${rethink.className} antialiased gap-y-12 tracking-tight text-white bg-zinc-950`}
         >
+          <ToastContainer />
           <Navbar />
           <main className="pb-10">{children}</main>
         </body>
