@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import RewardList from "./components/RewardList";
 import { CircleStop, Pause } from "lucide-react";
 export default function CreateLive() {
-  const isStreaming = true; // Replace with actual streaming state
+  const isStreaming = false; // Replace with actual streaming state
   return (
     <div className="p-2">
       {/* FIELDS */}

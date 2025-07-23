@@ -52,7 +52,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
           <button
             onClick={() => setIsPasswordVisible(!isPasswordVisible)}
             type="button"
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-zinc-500 hover:text-white focus:outline-none"
+            className="absolute right-3 top-0 bottom-0 flex items-center justify-center w-6 h-full text-zinc-500 hover:text-white focus:outline-none"
           >
             {isPasswordVisible ? <Eye /> : <EyeClosed />}
           </button>

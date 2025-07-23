@@ -1,3 +1,5 @@
+import RaffleSpinnerModal from "@/app/(streamer)/components/RaffleSpinner";
+import { RaffleScrollModal } from "@/app/(user)/components/RaffleScrollModal";
 import { Button } from "@/components/ui/button";
 import { Gift, Trash } from "lucide-react";
 import React from "react";
@@ -15,7 +17,7 @@ export default function RewardCard({ rewardName }: { rewardName: string }) {
       </div>
       {/* ACTION BUTTONS */}
       <div className="flex items-center gap-4">
-        <Button className="bg-main">Start</Button>
+        <RaffleSpinnerModal />
         <Button className="bg-zinc-800 rounded-lg text-red-400 size-9">
           <Trash />
         </Button>
