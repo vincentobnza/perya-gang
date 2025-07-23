@@ -7,6 +7,7 @@ import Cta from "@/components/Cta";
 
 export default function Home() {
   return (
+    <>    
     <div className="App space-y-8">
       <Hero />
       <Main />
@@ -14,5 +15,6 @@ export default function Home() {
       <Leaderboard />
       <Cta />
     </div>
+    </>
   );
 }
