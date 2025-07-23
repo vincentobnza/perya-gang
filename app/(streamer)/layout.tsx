@@ -3,6 +3,7 @@ import Navbar from "../navbar";
 import "../globals.css";
 import { Rethink_Sans } from "next/font/google";
 import { Metadata } from "next";
+import Footer from "../Footer";
 
 const rethink = Rethink_Sans({
   variable: "--font-rethink-sans",
@@ -23,12 +24,14 @@ export default function RootLayout({
     <>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${rethink.className} antialiased gap-y-12 tracking-tight text-white bg-zinc-950`}
+          className={`${rethink.className} antialiased gap-y-12 tracking-tight text-white bg-zinc-950 flex flex-col`}
         >
           <Navbar />
-          <main className="max-w-screen-xl mx-auto pb-130 py-5 md:py-8 lg:py-10">
+          <main className="w-full flex-1 max-w-screen-xl mx-auto pb-10">
             {children}
           </main>
+
+          <Footer />
         </body>
       </html>
     </>
