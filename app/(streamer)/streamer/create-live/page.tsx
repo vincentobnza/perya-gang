@@ -1,5 +1,11 @@
 import React from "react";
 
 export default function CreateLive() {
-  return <div>Create Live Page</div>;
+  return (
+    <div>
+      <div className="flex items-center w-full"></div>
+
+      {/* FIELDS */}
+    </div>
+  );
 }

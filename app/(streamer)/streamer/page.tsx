@@ -23,7 +23,7 @@ export default function Page({}) {
         )}
       </div>
       <main className="w-full min-h-[70vh] flex justify-center items-center">
-        {/* IF NO REWARDS CREATED */}
+        {/* IF NO REWARDS CREATED AND IF CREATED */}
         {rewards !== null ? <NoRewardsCreated /> : <Events />}
       </main>
     </div>
