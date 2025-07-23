@@ -1,5 +1,10 @@
 import React from "react";
+import { DateSegmentControlTabs } from "../components/DateSegmentControlTabs";
 
-export default function Page() {
-  return <div>THIS IS THE STREAMER PAGE</div>;
+export default function Page({}) {
+  return (
+    <div>
+      <DateSegmentControlTabs />
+    </div>
+  );
 }
