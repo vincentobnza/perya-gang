@@ -1,4 +1,4 @@
-import { RaffleScrollModal } from "@/app/portal/components/RaffleScrollModal";
+import { RaffleScrollModal } from "@/app/(user)/components/RaffleScrollModal";
 import React from "react";
 
 export default function StreamingVideo() {

@@ -1,6 +1,6 @@
 import StreamingVideo from "@/components/Streaming-video";
 import React from "react";
-import GiveAwaySchedule from "./components/GiveAwaySchedule";
+import GiveAwaySchedule from "../components/GiveAwaySchedule";
 import Leaderboard from "@/components/Leaderboard";
 import Heading from "@/components/Heading";
 import { LeaderboardTable } from "@/components/ui/leaderboard-table";
