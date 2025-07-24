@@ -7,6 +7,12 @@
   display: none;
 }
 
+.raffle-scroll {
+  line-height: normal;
+  padding: 0;
+  margin: 0;
+}
+
 .bg-main {
   background-color: #bdfc06;
   color: #000;

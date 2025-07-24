@@ -9,11 +9,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { VISIBLE_HEIGHT, ITEM_HEIGHT, ROLL_DURATION } from "./constants";
+import { Confetti } from "@/components/magicui/confetti";
+import { useRef } from "react";
+
+import { type ConfettiRef } from "@/components/magicui/confetti";
 
 export function RaffleSpinnerModal() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button className="bg-[#bdfc06] text-black text-md font-bold">
           Start
@@ -21,68 +28,54 @@ export function RaffleSpinnerModal() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-xl bg-zinc-900 border-none p-8 outline-none rounded-4xl [&>button]:hidden">
         <DialogHeader>
-          <DialogTitle className="text-center text-xl md:text-2xl mb-8 ">
+          <DialogTitle className="text-center text-xl md:text-2xl mb-4 ">
             Raffle Spinners
           </DialogTitle>
         </DialogHeader>
         {/* RAFFLE  */}
-        <Raffle />
+        <Raffle isOpen={isOpen} setIsOpen={setIsOpen} />
         <RaffleParticipants />
-        <DialogFooter></DialogFooter>
       </DialogContent>
     </Dialog>
   );
 }
 
-const ROLL_DURATION = 10000; // 10 seconds
-const ITEM_HEIGHT = 56; // px, adjust to match UserCard height+margin
-
-const Raffle = () => {
+const Raffle = ({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}) => {
   const [isRolling, setIsRolling] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
   const [selectedWinner, setSelectedWinner] = useState<string | null>(null);
+  const confettiRef = useRef<ConfettiRef>(null);
 
-  // Helper to repeat the list for seamless looping
-  const getLoopedList = () => {
-    // Repeat the list 20 times for smoothness
-    let arr: any[] = [];
-    for (let i = 0; i < 20; i++) arr = arr.concat(SAMPLE_USERS);
-    return arr;
-  };
-  const loopedList = getLoopedList();
-
-  // Calculate the number of visible items and the center offset
-  const VISIBLE_HEIGHT = 250; // px, matches the container height
-  const VISIBLE_COUNT = Math.floor(VISIBLE_HEIGHT / ITEM_HEIGHT); // number of visible items
-  const CENTER_OFFSET = Math.floor(VISIBLE_COUNT / 2); // index offset for center
+  const VISIBLE_COUNT = Math.floor(VISIBLE_HEIGHT / ITEM_HEIGHT);
+  const CENTER_OFFSET = Math.floor(VISIBLE_COUNT / 2);
+  const loopedList = Array.from({ length: 20 }, () => SAMPLE_USERS).flat();
   const centerIndex = Math.floor(loopedList.length / 2);
 
-  // Start the rolling animation
   const handleStartRaffle = () => {
     setIsRolling(true);
+    setSelectedWinner(null);
 
-    // Pick a winner
     const winnerIndex = Math.floor(Math.random() * SAMPLE_USERS.length);
-
-    const start = performance.now();
-    // Center the winner in the visible area
     const winnerFinalIndex =
       centerIndex - (centerIndex % SAMPLE_USERS.length) + winnerIndex;
-    const centerScrollOffset = winnerFinalIndex - CENTER_OFFSET;
+
+    const targetScrollTop = (winnerFinalIndex - CENTER_OFFSET) * ITEM_HEIGHT;
+    const start = performance.now();
 
     function animate(now: number) {
       const elapsed = now - start;
-      let t = Math.min(elapsed / ROLL_DURATION, 1); // 0 to 1
+      const t = Math.min(elapsed / ROLL_DURATION, 1);
+      const easeOut = (x: number) => 1 - Math.pow(1 - x, 3);
+      const easedT = easeOut(t);
 
-      // Ease out cubic for deceleration
-      const ease = (x: number) => 1 - Math.pow(1 - x, 3);
-      const easedT = ease(t);
-
-      // Calculate scroll position
-      // Start at 0, end at centerScrollOffset * ITEM_HEIGHT
-      const maxScroll = centerScrollOffset * ITEM_HEIGHT;
-      const scrollTop = maxScroll * easedT;
+      const scrollTop = targetScrollTop * easedT;
       if (scrollRef.current) {
         scrollRef.current.scrollTop = scrollTop;
       }
@@ -90,20 +83,22 @@ const Raffle = () => {
       if (t < 1) {
         animationRef.current = requestAnimationFrame(animate);
       } else {
-        // Snap to winner
         setTimeout(() => {
           if (scrollRef.current) {
-            scrollRef.current.scrollTop = maxScroll;
+            scrollRef.current.scrollTop = targetScrollTop;
           }
           setIsRolling(false);
           setSelectedWinner(SAMPLE_USERS[winnerIndex].username);
-        }, 200);
+          setTimeout(() => {
+            setIsOpen(false);
+          }, 5000); //CHANGE THIS IF YOU WANT TO EDIT THE MODAL CLOSING TIME
+        }, 100);
       }
     }
+
     animationRef.current = requestAnimationFrame(animate);
   };
 
-  // Clean up animation frame
   useEffect(() => {
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
@@ -111,38 +106,60 @@ const Raffle = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-sm mx-auto space-y-6 p-2 relative">
-      {/* SELECTED AREA WITH BORDER ALWAYS ON SCREEN VIEW POSITION IS CENTERED AND FIXED */}
-      {selectedWinner && (
-        <div className="relative">
-          <div
-            className="pointer-events-none z-50 absolute translate-x-0 left-0 right-0 flex justify-center bg-lime-400/10"
-            style={{
-              top: ITEM_HEIGHT * CENTER_OFFSET,
-              height: ITEM_HEIGHT,
-              border: "2px solid #bdfc06",
-              borderRadius: "8px",
+    <div className="relative w-full max-w-sm mx-auto p-2 space-y-6  rounded-lg shadow-[2px_4px_16px_0px_rgba(24, 24, 27,0.06)_inset]">
+      <div className="relative" style={{ height: VISIBLE_HEIGHT }}>
+        {selectedWinner && (
+          <Confetti
+            ref={confettiRef}
+            className="absolute left-0 top-0 z-0 size-full"
+            onMouseEnter={() => {
+              confettiRef.current?.fire({});
             }}
-          ></div>
+          />
+        )}
+        {/* Scrollable list */}
+        <div
+          ref={scrollRef}
+          className="overflow-y-auto rounded-xl"
+          style={{ height: VISIBLE_HEIGHT }}
+        >
+          <div className="flex flex-col">
+            {loopedList.map((user, idx) => (
+              <UserCard
+                key={idx}
+                name={user.name}
+                username={user.username}
+                avatarUrl={user.avatarUrl}
+                isWinner={user.username === selectedWinner}
+              />
+            ))}
+          </div>
         </div>
-      )}
-      <div
-        ref={scrollRef}
-        className="w-full mx-auto min-h-[200px] max-h-[250px] overflow-y-auto rounded-xl mb-5 relative raffle-scroll"
-        style={{ scrollBehavior: isRolling ? "auto" : "smooth", height: 250 }}
-      >
-        {/* Raffle List */}
-        <div style={{ paddingTop: 0, paddingBottom: 0 }} className="relative">
-          {loopedList.map((user, idx) => (
-            <UserCard
-              key={idx + user.username}
-              name={user.name}
-              username={user.username}
-              avatarUrl={user.avatarUrl}
+
+        {/* 🎯 FIXED highlight box centered vertically */}
+        <div
+          className="absolute left-0 right-0 pointer-events-none z-50"
+          style={{
+            top: "50%",
+            transform: "translateY(-50%)",
+            height: ITEM_HEIGHT,
+            border: "2px solid #bdfc06",
+            borderRadius: "8px",
+            backgroundColor: "rgba(190, 252, 6, 0.1)",
+          }}
+        >
+          <div className="relative w-full h-full">
+            <Image
+              src="/crown.png"
+              alt="Crown"
+              width={45}
+              height={45}
+              className="absolute -top-2 left-1 transform -translate-x-1/2 -translate-y-1/2 -rotate-24"
             />
-          ))}
+          </div>
         </div>
       </div>
+
       <Button
         className="bg-main mx-auto w-full text-md"
         size="lg"
@@ -155,16 +172,33 @@ const Raffle = () => {
   );
 };
 
-const UserCard = ({ name, username, avatarUrl }: any) => {
+const UserCard = ({
+  name,
+  username,
+  avatarUrl,
+  isWinner = false,
+}: {
+  name: string;
+  username: string;
+  avatarUrl: string;
+  isWinner?: boolean;
+}) => {
   return (
     <div
-      className={`flex items-center gap-4 mb-2 p-3 rounded-lg relative cursor-pointer transition-all duration-200 bg-zinc-800/10 hover:bg-zinc-800/20`}
-      style={{ height: ITEM_HEIGHT }}
+      className={`relative flex items-center gap-4 px-4 py-3 transition-all duration-200 ${
+        isWinner
+          ? "bg-lime-400/5 text-lime-400 font-semibold"
+          : "bg-zinc-800/10 hover:bg-zinc-800/20"
+      }`}
+      style={{
+        height: ITEM_HEIGHT,
+        boxSizing: "border-box",
+      }}
     >
       <img src={avatarUrl} alt={name} className="size-8 rounded-full" />
       <div className="flex flex-col">
-        <h1 className="text-md text-zinc-200">{name}</h1>
-        <p className="text-xs opacity-40">@{username}</p>
+        <h1 className="text-md">{name}</h1>
+        <p className="text-xs opacity-50">@{username}</p>
       </div>
     </div>
   );
