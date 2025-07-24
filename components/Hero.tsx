@@ -48,7 +48,7 @@ export default function Hero() {
           <Button
             variant="ghost"
             size="icon"
-            className="text-[#BDFC06] bg-zinc-800/50 border border-zinc-700 hover:bg-zinc-700/50"
+            className="text-main bg-zinc-800/50 border border-zinc-700 hover:bg-zinc-700/50"
             onClick={() => swiperRef.current?.swiper?.slidePrev()}
           >
             <ArrowLeft className="size-5" />
@@ -56,7 +56,7 @@ export default function Hero() {
           <Button
             variant="ghost"
             size="icon"
-            className="text-[#BDFC06] bg-zinc-800/50 border border-zinc-700 hover:bg-zinc-700/50"
+            className="text-main bg-zinc-800/50 border border-zinc-700 hover:bg-zinc-700/50"
             onClick={() => swiperRef.current?.swiper?.slideNext()}
           >
             <ArrowRight className="size-5" />
@@ -84,7 +84,7 @@ export default function Hero() {
           {!user ? (
             <AuthDrawer />
           ) : (
-            <Button className="w-[210px] h-13 bg-[#BDFC06] text-black font-bold text-md">
+            <Button className="w-[210px] h-13 bg-main text-black font-bold text-md">
               Get Started
             </Button>
           )}

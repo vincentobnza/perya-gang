@@ -30,9 +30,15 @@ export function CreateEvent() {
           {/* FIELDS */}
           <div className="mt-6 w-full">
             <TextField
-              label="Set Entry Requirements Amount"
+              label="Event Title"
+              placeholder="Untitled Event"
+              className="w-full mb-4 bg-zinc-800/50 border border-zinc-700/50"
+            />
+            <TextField
+              label="Set Minimum Deposit"
               placeholder="entry rewards"
               className="w-full mb-4 bg-zinc-800/50 border border-zinc-700/50"
+              value="0"
             />
 
             {/* CALENDAR INPUT */}

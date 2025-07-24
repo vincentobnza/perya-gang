@@ -4,56 +4,82 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { VISIBLE_HEIGHT, ITEM_HEIGHT, ROLL_DURATION } from "./constants";
 import { Confetti } from "@/components/magicui/confetti";
-import { useRef } from "react";
-
 import { type ConfettiRef } from "@/components/magicui/confetti";
 import { Play } from "lucide-react";
+import WinnerAlertModal from "./WinnerAlertModal";
 
 export function RaffleSpinnerModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isWinnerModalOpen, setIsWinnerModalOpen] = useState(false);
+  const [isRolling, setIsRolling] = useState(false);
+
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button className="bg-[#bdfc06] text-black text-md font-bold">
-          <Play className="size-3" strokeWidth={3} />
-          Start
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-xl bg-zinc-900 border-none p-8 outline-none rounded-4xl [&>button]:hidden">
-        <DialogHeader>
-          <DialogTitle className="text-center text-xl md:text-2xl mb-4 ">
-            Raffle Spinners
-          </DialogTitle>
-        </DialogHeader>
-        {/* RAFFLE  */}
-        <Raffle isOpen={isOpen} setIsOpen={setIsOpen} />
-        <RaffleParticipants />
-      </DialogContent>
-    </Dialog>
+    <>
+      <Dialog
+        open={isOpen}
+        onOpenChange={(val) => {
+          if (!isRolling) {
+            setIsOpen(val);
+          }
+        }}
+      >
+        <DialogTrigger asChild>
+          <Button className="bg-[#bdfc06] text-black text-md font-bold">
+            <Play className="size-3" strokeWidth={3} />
+            Start
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-xl bg-zinc-900 border-none p-2 md:p-8 outline-none rounded-4xl [&>button]:hidden">
+          <DialogHeader>
+            <DialogTitle className="text-center text-xl md:text-2xl mb-4">
+              Raffle Spinners
+            </DialogTitle>
+          </DialogHeader>
+          <Raffle
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            setIsWinnerModalOpen={setIsWinnerModalOpen}
+            setIsRolling={setIsRolling}
+            isRolling={isRolling}
+          />
+          <RaffleParticipants />
+        </DialogContent>
+      </Dialog>
+
+      <WinnerAlertModal
+        isOpen={isWinnerModalOpen}
+        setIsOpen={setIsWinnerModalOpen}
+      />
+    </>
   );
 }
 
 const Raffle = ({
   isOpen,
   setIsOpen,
+  setIsWinnerModalOpen,
+  setIsRolling,
+  isRolling,
 }: {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  setIsWinnerModalOpen: (open: boolean) => void;
+  setIsRolling: (val: boolean) => void;
+  isRolling: boolean;
 }) => {
-  const [isRolling, setIsRolling] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
   const [selectedWinner, setSelectedWinner] = useState<string | null>(null);
   const confettiRef = useRef<ConfettiRef>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const VISIBLE_COUNT = Math.floor(VISIBLE_HEIGHT / ITEM_HEIGHT);
   const CENTER_OFFSET = Math.floor(VISIBLE_COUNT / 2);
@@ -63,6 +89,11 @@ const Raffle = ({
   const handleStartRaffle = () => {
     setIsRolling(true);
     setSelectedWinner(null);
+
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().catch((e) => console.error("Audio error:", e));
+    }
 
     const winnerIndex = Math.floor(Math.random() * SAMPLE_USERS.length);
     const winnerFinalIndex =
@@ -91,9 +122,18 @@ const Raffle = ({
           }
           setIsRolling(false);
           setSelectedWinner(SAMPLE_USERS[winnerIndex].username);
+
+          if (audioRef.current) {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
+          }
+
           setTimeout(() => {
             setIsOpen(false);
-          }, 5000); //CHANGE THIS IF YOU WANT TO EDIT THE MODAL CLOSING TIME
+            setTimeout(() => {
+              setIsWinnerModalOpen(true);
+            }, 500);
+          }, 2000);
         }, 100);
       }
     }
@@ -108,7 +148,8 @@ const Raffle = ({
   }, []);
 
   return (
-    <div className="relative w-full max-w-sm mx-auto p-2 space-y-6  rounded-lg shadow-[2px_4px_16px_0px_rgba(24, 24, 27,0.06)_inset]">
+    <div className="relative w-full max-w-sm mx-auto p-2 space-y-6 rounded-lg shadow-[2px_4px_16px_0px_rgba(24, 24, 27,0.06)_inset]">
+      <audio ref={audioRef} src="/raffle-sound-effect.mp3" preload="auto" />
       <div className="relative" style={{ height: VISIBLE_HEIGHT }}>
         {selectedWinner && (
           <Confetti
@@ -119,11 +160,14 @@ const Raffle = ({
             }}
           />
         )}
-        {/* Scrollable list */}
         <div
           ref={scrollRef}
-          className="overflow-y-auto rounded-xl"
-          style={{ height: VISIBLE_HEIGHT }}
+          className="rounded-xl"
+          style={{
+            height: VISIBLE_HEIGHT,
+            overflowY: "hidden",
+            pointerEvents: "none",
+          }}
         >
           <div className="flex flex-col">
             {loopedList.map((user, idx) => (
@@ -138,7 +182,6 @@ const Raffle = ({
           </div>
         </div>
 
-        {/* 🎯 FIXED highlight box centered vertically */}
         <div
           className="absolute left-0 right-0 pointer-events-none z-50"
           style={{
@@ -255,7 +298,7 @@ const SAMPLE_USERS = [
   {
     name: "Charlie White",
     username: "charliewhite7654321",
-    avatarUrl: "/avatar1.png",
+    avatarUrl: "/avatar5.png",
   },
 ];
 

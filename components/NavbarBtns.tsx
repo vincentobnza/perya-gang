@@ -1,8 +1,16 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
-import { User } from "lucide-react";
+import { LogOut, User, User2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function NavbarBtns({
   isAuthenticated = true,
@@ -18,7 +26,7 @@ export default function NavbarBtns({
         {!isAuthenticated && (
           <Button
             variant="ghost"
-            className="uppercase text-md font-black text-[#BDFC06]"
+            className="uppercase text-md font-black text-main"
           >
             REGISTER
           </Button>
@@ -32,14 +40,26 @@ export default function NavbarBtns({
 const UserAvatar = () => {
   const router = useRouter();
   return (
-    <Avatar
-      className="border border-zinc-900 cursor-pointer"
-      onClick={() => {
-        router.push("/profile");
-      }}
-    >
-      <AvatarImage src="/avatar4.png" alt="@avatar" />
-      <AvatarFallback>CN</AvatarFallback>
-    </Avatar>
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <Avatar className="border border-zinc-900 cursor-pointer">
+          <AvatarImage src="/avatar1.png" alt="@avatar" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="end"
+        className="self-start w-60 bg-zinc-900 border-none outline-none border border-zinc-800 p-2"
+      >
+        <DropdownMenuLabel className="font-bold text-zinc-400">
+          My Account
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => router.push("/profile")}>
+          Profile
+        </DropdownMenuItem>
+        <DropdownMenuItem>Logout</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

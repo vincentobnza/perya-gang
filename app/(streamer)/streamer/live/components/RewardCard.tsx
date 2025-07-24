@@ -3,6 +3,7 @@ import RaffleSpinnerModal from "@/app/(streamer)/components/RaffleSpinner";
 import { Gift } from "lucide-react";
 import React from "react";
 import DeleteEventModal from "./DeleteEventModal";
+import EditRewardModal from "./EditRewardModal";
 
 export default function RewardCard({ rewardName }: { rewardName: string }) {
   return (
@@ -18,7 +19,10 @@ export default function RewardCard({ rewardName }: { rewardName: string }) {
       {/* ACTION BUTTONS */}
       <div className="flex items-center gap-4">
         <RaffleSpinnerModal />
-        <DeleteEventModal />
+        <div className="flex  items-center gap-x-2">
+          <EditRewardModal />
+          <DeleteEventModal />
+        </div>
       </div>
     </div>
   );

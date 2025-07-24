@@ -15,7 +15,7 @@ export default function Heading({
 }: HeadingProps & { children?: React.ReactNode }) {
   return (
     <>
-      <div className="p-2 px-3 primary-color rounded-full bg-[#bdfc06] self-start text-black font-bold mb-4">
+      <div className="p-2 px-3 primary-color rounded-full bg-main self-start text-black font-bold mb-4">
         {topText}
       </div>
 

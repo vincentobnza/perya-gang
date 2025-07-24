@@ -17,7 +17,7 @@ const WinningLogItem: React.FC<WinningLogProps> = ({ log }) => {
     <div className="p-4 bg-zinc-800/60 border border-zinc-800 rounded-lg shadow-m flex items-center justify-between">
       <div className="flex items-start gap-3">
         <Avatar>
-          <AvatarImage src="/avatar4.png" alt="User Avatar" />
+          <AvatarImage src="/avatar1.png" alt="User Avatar" />
         </Avatar>
         <div>
           <h3 className="text-lg font-medium">{log.name}</h3>

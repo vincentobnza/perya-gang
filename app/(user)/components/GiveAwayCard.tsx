@@ -1,5 +1,5 @@
 import React from "react";
-import { Clock, Gift } from "lucide-react";
+import { ArrowUpRight, Clock, Gift } from "lucide-react";
 import { RaffleMechanicsModal } from "./RaffleMechanicsModal";
 import { ParticipantsTooltip } from "@/components/ui/participants-tooltip";
 
@@ -45,26 +45,28 @@ export default function GiveAwayCard({
           </div>
         )}
 
-        <div className="flex justify-center items-start space-y-2 mb-8 flex-col">
-          <h1 className="text-md opacity-70 font-medium">Participants</h1>
-          <div className="flex space-x-7">
-            <div>
-              <ParticipantsTooltip size="size-8" />
-            </div>
-            <div className="border-l-2 border-zinc-700 pl-3 flex items-center">
-              {counting >= 100 ? (
-                <h3 className="text-lg font-semibold text-zinc-600">
-                  {counting} +
-                </h3>
-              ) : (
+        <div className="w-full flex justify-between items-center">
+          <div className="flex justify-center items-start space-y-2 mb-8 flex-col">
+            <h1 className="text-md opacity-70 font-medium">Participants</h1>
+            <div className="flex space-x-7">
+              <div>
+                <ParticipantsTooltip size="size-8" />
+              </div>
+              <div className="border-l-2 border-zinc-700 pl-3 flex items-center">
                 <h3 className="text-lg font-semibold text-zinc-600">
                   {counting}
+                  <span className="ml-1 text-[8px] tracking-wide pb-1">
+                    Active
+                  </span>
                 </h3>
-              )}
+              </div>
             </div>
           </div>
+          <button className="text-xs opacity-80 cursor-pointer text-zinc-400 font-semibold mr-2  transition-opacity flex items-center gap-x-2 hover:opacity-80">
+            <ArrowUpRight className="size-4" />
+            View All
+          </button>
         </div>
-
         <div className="space-y-2">
           <div className="flex items-center gap-x-6">
             <div className="p-1.5  rounded-lg bg-zinc-800 text-zinc-300">

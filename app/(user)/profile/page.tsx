@@ -33,7 +33,7 @@ const Header = () => {
       <div className="flex flex-col items-center gap-2 justify-center">
         <div className="p-0.5 overflow-hidden bg-zinc-900 rounded-full">
           <Avatar className="size-20">
-            <AvatarImage src="/avatar4.png"></AvatarImage>
+            <AvatarImage src="/avatar1.png"></AvatarImage>
           </Avatar>
         </div>
         <h1 className="text-2xl md:text-3xl font-bold">

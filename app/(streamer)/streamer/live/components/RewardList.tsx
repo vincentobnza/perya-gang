@@ -35,7 +35,6 @@ const Header = () => {
       </h1>
       {/* CTA's */}
       <div className="flex items-center gap-2">
-        <Button size="lg">Edit</Button>
         <AddRewardsModal />
       </div>
     </div>

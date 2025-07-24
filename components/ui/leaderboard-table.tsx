@@ -58,7 +58,7 @@ export function LeaderboardTable() {
         <TableBody>
           {invoices.map((invoice, idx) => (
             <TableRow key={invoice.id}>
-              <TableCell className=" text-[#bdfc06] font-bold text-lg p-2">
+              <TableCell className=" text-main font-bold text-lg p-2">
                 # {idx + 1}
               </TableCell>
               <TableCell className=" p-2">

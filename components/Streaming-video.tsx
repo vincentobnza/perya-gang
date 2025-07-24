@@ -6,15 +6,16 @@ export default function StreamingVideo() {
     <div className="w-full min-h-[80vh] bg-zinc-900/20 relative">
       <RaffleScrollModal />
       {/* SAMPLE VIDEO */}
-      <iframe
-        className="absolute inset-0 w-full h-full"
-        src="https://www.youtube.com/embed/HfGnW_7JaTY?si=Y4bvYZl_CTHHahnV&autoplay=1&mute=1&controls=0"
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-      />
+      <div className="mt-5 max-w-screen-xl mx-auto aspect-video relative rounded-2xl overflow-hidden shadow-zinc-800  border border-zinc-800">
+        <video
+          className="absolute top-0 left-0 w-full h-full"
+          src="/livestream.mp4"
+          autoPlay
+          muted
+          controls={false}
+          loop
+        />
+      </div>
     </div>
   );
 }

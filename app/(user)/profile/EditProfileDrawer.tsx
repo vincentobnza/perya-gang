@@ -40,7 +40,7 @@ export default function EditProfileDrawer() {
               {/* profile form */}
               <div className="size-28 bg-zinc-800 mx-auto rounded-full grid place-items-center relative">
                 <Image
-                  src="/avatar4.png"
+                  src="/avatar1.png"
                   alt="Profile Picture"
                   width={112}
                   height={112}

@@ -30,11 +30,11 @@ export default function DeleteEventModal() {
               undone.
             </p>
           </div>
-          <DialogFooter className="w-full">
+          <DialogFooter className="w-full pt-5 border-t border-zinc-700/50">
             <Button className="bg-zinc-900/20 border border-zinc-400/10 text-zinc-300 rounded-lg">
               Cancel
             </Button>
-            <Button className="bg-red-900/20 border border-red-400/50 text-red-300 rounded-lg">
+            <Button className="bg-orange-600/90 text-white rounded-lg border border-orange-300">
               Delete
             </Button>
           </DialogFooter>

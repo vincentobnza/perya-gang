@@ -94,7 +94,7 @@ const Cards = ({ card }: CardProps) => {
 
         <Button
           className={`font-bold rounded-full text-md ${
-            !card.isNot ? "bg-[#bdfc06]" : "bg-[#CC00FF]"
+            !card.isNot ? "bg-main" : "bg-[#CC00FF]"
           }
           } text-black`}
           size="lg"

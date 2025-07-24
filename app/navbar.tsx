@@ -33,11 +33,11 @@ export default function Navbar() {
         <Link href="/">
           <Image src="/LOGO.png" width={50} height={50} alt="Logo" />
         </Link>
-
         {isAuthenticated && (
-          <h1 className="text-sm md:text-lg lg:text-xl">Hello {user}!</h1>
+          <h1 className="text-sm md:text-[15px] lg:text-lg opacity-70">
+            Hello {user}!
+          </h1>
         )}
-
         <NavbarBtns isAuthenticated={isAuthenticated} />
       </div>
     </nav>

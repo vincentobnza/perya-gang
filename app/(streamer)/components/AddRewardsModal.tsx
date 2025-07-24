@@ -21,7 +21,7 @@ export default function AddRewardsModal() {
         </DialogTrigger>
         <DialogContent className="sm:max-w-lg bg-zinc-900 border-none outline-none rounded-2xl">
           <DialogHeader>
-            <DialogTitle className="text-2xl">Events</DialogTitle>
+            <DialogTitle className="text-2xl">Reward</DialogTitle>
           </DialogHeader>
           <div className="mt-6 w-full">
             <TextField

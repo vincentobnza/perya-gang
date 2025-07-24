@@ -1,4 +1,4 @@
-const ROLL_DURATION = 10000;
+const ROLL_DURATION = 5000;
 const ITEM_HEIGHT = 60;
 const VISIBLE_HEIGHT = 302;
 
