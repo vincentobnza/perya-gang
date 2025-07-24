@@ -1,7 +1,8 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { User } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export default function NavbarBtns({
   isAuthenticated = true,
@@ -13,7 +14,7 @@ export default function NavbarBtns({
   const portalRoute = pathname.startsWith("/portal") ? isAuthenticated : true;
   return (
     <div>
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-4">
         {!isAuthenticated && (
           <Button
             variant="ghost"
@@ -22,10 +23,23 @@ export default function NavbarBtns({
             REGISTER
           </Button>
         )}
-        <Button size="icon">
-          <User className="size-5 text-[#BDFC06]" />
-        </Button>
+        <UserAvatar />
       </div>
     </div>
   );
 }
+
+const UserAvatar = () => {
+  const router = useRouter();
+  return (
+    <Avatar
+      className="border border-zinc-900 cursor-pointer"
+      onClick={() => {
+        router.push("/profile");
+      }}
+    >
+      <AvatarImage src="/avatar4.png" alt="@avatar" />
+      <AvatarFallback>CN</AvatarFallback>
+    </Avatar>
+  );
+};

@@ -37,7 +37,7 @@ export default function Hero() {
                 alt={`Slide ${idx + 1}`}
                 width={500}
                 height={500}
-                className="object-contain rounded-3xl mx-auto"
+                className="object-contain rounded-4xl mx-auto"
               />
             </SwiperSlide>
           ))}

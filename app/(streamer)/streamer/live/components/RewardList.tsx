@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import RewardCard from "./RewardCard";
+import AddRewardsModal from "@/app/(streamer)/components/AddRewardsModal";
 
 export default function RewardList() {
   return (
@@ -35,9 +36,7 @@ const Header = () => {
       {/* CTA's */}
       <div className="flex items-center gap-2">
         <Button size="lg">Edit</Button>
-        <Button size="lg" className="bg-main">
-          Add Rewards
-        </Button>
+        <AddRewardsModal />
       </div>
     </div>
   );

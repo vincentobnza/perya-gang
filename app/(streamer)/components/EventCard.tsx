@@ -5,8 +5,10 @@ import React from "react";
 import { Clock, Gift } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ParticipantsTooltip } from "@/components/ui/participants-tooltip";
+import { EditEventDialogModal } from "./EditEventModal";
 
 type GiveAwayCardProps = {
+  title?: string;
   counting: number;
   startTime?: string;
   endTime?: string;
@@ -16,6 +18,7 @@ type GiveAwayCardProps = {
 };
 
 export default function EventCard({
+  title,
   counting,
   startTime,
   endTime,
@@ -26,12 +29,9 @@ export default function EventCard({
   return (
     <div className="w-full rounded-2xl bg-zinc-900 border border-zinc-800 shadow-xl">
       <div className="w-full flex items-center justify-between p-5 border-b border-zinc-800">
-        <h4 className="text-sm font-medium text-zinc-400">
-          {counting} And Counting!
-        </h4>
-
+        <h1 className="text-lg font-medium text-zinc-300">{title}</h1>
         <div className="flex items-center gap-2">
-          <Button className="text-md font-bold bg-zinc-800">Edit</Button>
+          <EditEventDialogModal />
           <Button
             className="bg-[#bdfc06] text-black text-md font-bold"
             onClick={() => {

@@ -7,6 +7,7 @@ export default function Events() {
       {events.map((event, idx) => (
         <EventCard
           key={idx}
+          title={event.title}
           counting={event.counting}
           startTime={event.startTime}
           endTime={event.endTime}
@@ -21,14 +22,14 @@ export default function Events() {
 // Sample data for events
 const events = [
   {
+    title: "Surprise Box Showdown",
     counting: 100,
     startTime: "1:00 PM",
     endTime: "2:00 PM",
     cashGiveAways: "₱5,000 GCash + Surprise Mystery Box",
-    entryRequirements:
-      "To qualify for the giveaway, just cash in at least ₱1000  on any of our casino games.",
   },
   {
+    title: "Mystery Box Mega Hour",
     counting: 200,
     startTime: "2:00 PM",
     endTime: "3:00 PM",
@@ -37,6 +38,7 @@ const events = [
       "To qualify for the giveaway, just cash in at least ₱5000  on any of our casino games.",
   },
   {
+    title: "Golden Hour Raffle",
     counting: 300,
     startTime: "3:00 PM",
     endTime: "4:00 PM",
@@ -45,22 +47,23 @@ const events = [
       "To qualify for the giveaway, just cash in at least ₱2000  on any of our casino games.",
   },
   {
-    counting: 300,
-    startTime: "3:00 PM",
-    endTime: "4:00 PM",
-    cashGiveAways: "₱15,000 GCash + Surprise Mystery Box",
+    title: "Raffle Royale",
+    counting: 100,
+    startTime: "1:00 PM",
+    endTime: "2:00 PM",
+    cashGiveAways: "₱5,000 GCash + Surprise Mystery Box",
     entryRequirements:
-      "To qualify for the giveaway, just cash in at least ₱2000  on any of our casino games.",
+      "To qualify for the giveaway, just cash in at least ₱5000  on any of our casino games.",
   },
   {
-    counting: 300,
-    startTime: "3:00 PM",
-    endTime: "4:00 PM",
-    cashGiveAways: "₱15,000 GCash + Surprise Mystery Box",
-    entryRequirements:
-      "To qualify for the giveaway, just cash in at least ₱2000  on any of our casino games.",
+    title: "Lucky ₱2K Roll",
+    counting: 200,
+    startTime: "2:00 PM",
+    endTime: "3:00 PM",
+    cashGiveAways: "₱10,000 GCash + Surprise Mystery Box",
   },
   {
+    title: "GCash Grand Giveaway ",
     counting: 300,
     startTime: "3:00 PM",
     endTime: "4:00 PM",

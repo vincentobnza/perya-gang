@@ -10,7 +10,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { TvMinimalPlay, MousePointerClick, UserPlus, Gift } from "lucide-react";
+import {
+  TvMinimalPlay,
+  MousePointerClick,
+  UserPlus,
+  Gift,
+  ChevronsDown,
+} from "lucide-react";
 import { useState } from "react";
 import { JoinSuccess } from "./JoinSuccess";
 
@@ -40,7 +46,7 @@ export function RaffleMechanicsModal() {
               Earn points every time you watch streams, send messages
               <br /> and join giveaways.
             </DialogDescription>
-            <div className="overflow-hidden max-h-[500px] overflow-y-auto">
+            <div className="overflow-hidden max-h-[400px] overflow-y-auto">
               <div className="mt-4 w-full flex flex-col gap-3">
                 {Mechanics.map((item, index) => (
                   <Card
@@ -52,10 +58,25 @@ export function RaffleMechanicsModal() {
                 ))}
               </div>
 
-              <div className="mt-4 w-full flex flex-col gap-3">
+              <div className="mt-4 w-full flex flex-col gap-2">
                 <h1 className="text-left text-md opacity-70 font-semibold">
                   Participants
                 </h1>
+                {SAMPLE_USERS.map((user, index) => (
+                  <div className="flex flex-col gap-2">
+                    <UserCard
+                      key={index}
+                      name={user.name}
+                      username={user.username}
+                      avatarUrl={user.avatarUrl}
+                    />
+                  </div>
+                ))}
+
+                <Button className="mb-5 w-26 mx-auto text-xs rounded border border-zinc-800 h-8">
+                  View More
+                  <ChevronsDown />
+                </Button>
               </div>
             </div>
             <div className="w-full flex items-center justify-center text-sm text-zinc-300 p-3  border-3 border-dashed border-zinc-800 rounded shadow-xl">
@@ -112,6 +133,50 @@ const Card = ({ title, description, icon: Icon }: any) => {
           {title}
         </h3>
         <p className="text-sm text-zinc-500 text-left">{description}</p>
+      </div>
+    </div>
+  );
+};
+
+const SAMPLE_USERS = [
+  {
+    name: "Dennis Onay",
+    username: "dennis742378",
+    avatarUrl: "/avatar1.png",
+  },
+  {
+    name: "Kin Patrick",
+    username: "kin13316",
+    avatarUrl: "/avatar2.png",
+  },
+  {
+    name: "Alice Johnson",
+    username: "user1234",
+    avatarUrl: "/avatar3.png",
+  },
+  {
+    name: "Bob Brown",
+    username: "bobbrown1234567",
+    avatarUrl: "/avatar4.png",
+  },
+  {
+    name: "Charlie White",
+    username: "charliewhite7654321",
+    avatarUrl: "/avatar1.png",
+  },
+];
+
+const UserCard = ({ name, username, avatarUrl }: any) => {
+  return (
+    <div className="flex items-center gap-3 p-2 bg-zinc-800/10 border border-zinc-800 rounded-lg shadow-lg">
+      <img
+        src={avatarUrl}
+        alt={`${name}'s avatar`}
+        className="size-8 rounded-full"
+      />
+      <div className="flex flex-col">
+        <h1 className="text-sm font-semibold">{name}</h1>
+        <p className="text-[10px] opacity-50">@{username}</p>
       </div>
     </div>
   );
