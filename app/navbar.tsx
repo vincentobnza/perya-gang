@@ -1,6 +1,5 @@
 "use client";
 import NavbarBtns from "@/components/NavbarBtns";
-import { h1 } from "motion/react-client";
 import Image from "next/image";
 import Link from "next/link";
 import { validateLogin } from "./api/validate";

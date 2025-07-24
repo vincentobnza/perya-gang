@@ -10,9 +10,11 @@ import { RegisterAccount } from "@/app/api/auth/auth_register";
 import { set } from "zod";
 import { setToast } from "@/lib/common";
 import { useRouter } from "next/navigation";
+import { storeUserData } from "@/lib/hooks/useLocalStorage";
 
 export default function AccountDetails() {
  const router = useRouter();
+
   const onSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -24,14 +26,16 @@ export default function AccountDetails() {
        e.target.reg_cpassword.value = "";
       return;
     }
-    RegisterAccount(data, (success, message) => {
-      if (success) {
-        setToast(message, "success");
-        router.push("/portal");
+
+     const res = await RegisterAccount(data);
+      
+      if (res.success) {
+        storeUserData(res.data);
+        setToast(res.message, "success");
+        router.push("/portal")
       } else {
-        setToast(message, "error");
+          setToast(res.message, "error");
       }
-    });
 
   };
 
