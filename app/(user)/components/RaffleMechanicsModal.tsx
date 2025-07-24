@@ -53,12 +53,11 @@ export function RaffleMechanicsModal() {
               </div>
 
               <div className="mt-4 w-full flex flex-col gap-3">
-                <h1 className="text-left text-md opacity-70 font-semibold mb-5">
+                <h1 className="text-left text-md opacity-70 font-semibold">
                   Participants
                 </h1>
               </div>
             </div>
-
             <div className="w-full flex items-center justify-center text-sm text-zinc-300 p-3  border-3 border-dashed border-zinc-800 rounded shadow-xl">
               <h1>🛈 Winners will be announced live on stream.</h1>
             </div>

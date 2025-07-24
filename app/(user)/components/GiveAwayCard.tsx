@@ -2,9 +2,9 @@ import React from "react";
 import { Clock, Gift } from "lucide-react";
 import { RaffleMechanicsModal } from "./RaffleMechanicsModal";
 import { ParticipantsTooltip } from "@/components/ui/participants-tooltip";
-import { Separator } from "@/components/ui/separator";
 
 type GiveAwayCardProps = {
+  title: string;
   counting: number;
   startTime?: string;
   endTime?: string;
@@ -14,6 +14,7 @@ type GiveAwayCardProps = {
 };
 
 export default function GiveAwayCard({
+  title,
   counting,
   startTime,
   endTime,
@@ -23,15 +24,13 @@ export default function GiveAwayCard({
   return (
     <div className="w-full rounded-2xl bg-zinc-900 border border-zinc-800 shadow-xl">
       <div className="w-full flex items-center justify-between p-5 border-b border-zinc-800">
-        <h4 className="text-sm font-medium text-zinc-400">
-          {counting} And Counting!
-        </h4>
+        <h1 className="text-lg font-medium text-zinc-300">{title}</h1>
         <RaffleMechanicsModal />
       </div>
 
       <div className="p-5">
         {entryRequirements && (
-          <div className="w-full p-5 bg-zinc-800/70 rounded-lg border border-zinc-700/50 mb-5">
+          <div className="w-full p-5 bg-gradient-to-bl from-[#212121]/10 to-[#212121]/50 rounded-lg border border-zinc-700/50 mb-5">
             <h3 className="text-sm font-medium">Entry Requirements</h3>
             <p className="text-sm text-zinc-300 mt-4">
               <span
@@ -53,7 +52,7 @@ export default function GiveAwayCard({
               <ParticipantsTooltip size="size-8" />
             </div>
             <div className="border-l-2 border-zinc-700 pl-3 flex items-center">
-              {counting > 100 ? (
+              {counting >= 100 ? (
                 <h3 className="text-lg font-semibold text-zinc-600">
                   {counting} +
                 </h3>
@@ -71,7 +70,7 @@ export default function GiveAwayCard({
             <div className="p-1.5  rounded-lg bg-zinc-800 text-zinc-300">
               <Clock className="size-4" />
             </div>
-            <h3 className="text-md font-medium text-[#954af8]">
+            <h3 className="text-md font-medium text-[#a45eff]">
               {startTime} - {endTime}
             </h3>
           </div>

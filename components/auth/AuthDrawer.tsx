@@ -13,16 +13,16 @@ import {
 } from "@/components/ui/drawer";
 import AccountDetails from "./AccountDetails";
 
-export function AuthDrawer() {
+export function AuthDrawer({ text = "Get Started" }: { text?: string }) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
         <Button className="w-[210px] h-13 bg-[#BDFC06] text-black font-bold text-md">
-          Get Started
+          {text}
         </Button>
       </DrawerTrigger>
       <DrawerContent className="bg-zinc-950 border-none min-h-screen">
-        <div className="mt-8 mx-auto w-full max-w-screen-md p-2 flex flex-col justify-start items-start text-left overflow-y-scroll">
+        <div className="mt-8 mx-auto w-full max-w-screen-md p-0 md:p-2 flex flex-col justify-start items-start text-left overflow-y-scroll">
           <DrawerHeader>
             <DrawerTitle className="text-4xl text-left font-bold text-[#BDFC06] mb-4">
               Create your Account

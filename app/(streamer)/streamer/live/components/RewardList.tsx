@@ -6,7 +6,7 @@ export default function RewardList() {
   return (
     <div className="mt-8 w-full space-y-4">
       <Header />
-      <main className="w-full space-y-4">
+      <main className="w-full space-y-2">
         {rewards.map((reward, index) => (
           <RewardCard key={index} rewardName={reward} />
         ))}

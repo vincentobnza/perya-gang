@@ -19,10 +19,10 @@ export default function Heading({
         {topText}
       </div>
 
-      <h1 className="w-3/4 text-3xl md:text-4xl lg:text-7xl font-bold leading-none">
+      <h1 className="w-3/4 text-3xl md:text-4xl lg:text-7xl font-bold leading-none mb-2">
         {title || "Default Title"}
       </h1>
-      <p className="opacity   -70 font-medium">
+      <p className="w-full md:w-1/2 opacity-60 font-medium">
         {description || "Description goes here."}
       </p>
     </>

@@ -37,7 +37,8 @@ const cardInfo = [
     description:
       "Send at least 3 chat messages to join the event automatically.",
     icon: Pointer,
-    bgColor: "bg-zinc-700 text-white",
+    bgColor:
+      "bg-gradient-to-br from-zinc-800 to-zinc-900 border border-zinc-700/50 text-white",
     iconBg: "bg-blue-700",
   },
 
@@ -92,7 +93,7 @@ const Cards = ({ card }: CardProps) => {
         </div>
 
         <Button
-          className={`font-bold rounded-full ${
+          className={`font-bold rounded-full text-md ${
             !card.isNot ? "bg-[#bdfc06]" : "bg-[#CC00FF]"
           }
           } text-black`}

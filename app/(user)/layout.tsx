@@ -12,8 +12,8 @@ const rethink = Rethink_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Streamer - Perya Gang",
-  description: "A platform for streamers to connect and collaborate",
+  title: "Stream - Perya Gang",
+  description: "Watch live streams from Perya Gang",
 };
 export default function RootLayout({
   children,

@@ -1,6 +1,7 @@
 import React from "react";
 import Heading from "./Heading";
 import Wrapper from "./Wrapper";
+import { motion } from "motion/react";
 
 export default function Giveaways() {
   return (
@@ -45,7 +46,7 @@ type CardProps = {
 const GiveawayCards = ({ card }: CardProps) => {
   return (
     <div
-      className={`w-full relative flex p-8 flex-col justify-start items-start gap-4 rounded-3xl bg-zinc-800/80 border border-zinc-700/50 hover:bg-zinc-800 transition-all duration-300 ease-in-out`}
+      className={`w-full relative flex p-8 flex-col justify-start items-start gap-4 rounded-3xl bg-zinc-800/50 border border-zinc-700/50 hover:bg-zinc-800 transition-all duration-300 ease-in-out group`}
     >
       <h1 className="text-3xl font-bold">{card.price}</h1>
       <h3 className="text-sm opacity-70">GCash Credits</h3>
@@ -55,7 +56,7 @@ const GiveawayCards = ({ card }: CardProps) => {
       <img
         src={card.image}
         alt="image"
-        className="size-30 md:size-40 absolute -bottom-8 right-0"
+        className="size-32 md:size-40 absolute -bottom-8 right-0 transition-all duration-300 ease-in-out group-hover:-rotate-12 group-hover:scale-110"
       />
     </div>
   );

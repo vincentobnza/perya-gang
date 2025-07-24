@@ -6,7 +6,7 @@ import React from "react";
 
 export default function RewardCard({ rewardName }: { rewardName: string }) {
   return (
-    <div className="w-full p-3 bg-zinc-900/80 border border-zinc-800 flex items-center justify-between rounded-xl">
+    <div className="w-full p-4 bg-zinc-900/50 border border-zinc-800/50 flex items-center justify-between rounded-xl">
       <div className="flex items-center gap-4">
         <div className="p-1 rounded-full bg-zinc-800">
           <Gift className="size-5 text-purple-500" />

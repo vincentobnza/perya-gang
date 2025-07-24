@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "./ui/button";
+import { AuthDrawer } from "./auth/AuthDrawer";
 
 export default function () {
   return (
@@ -11,9 +12,7 @@ export default function () {
 
       {/* SIGN UP NOW BUTTON */}
 
-      <Button className="px-10 font-bold text-md  py-6 bg-[#bdfc06] text-black ">
-        Sign Up Now
-      </Button>
+      <AuthDrawer text="Sign Up Now" />
     </div>
   );
 }

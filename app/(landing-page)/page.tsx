@@ -7,14 +7,14 @@ import Cta from "@/components/Cta";
 
 export default function Home() {
   return (
-    <>    
-    <div className="App space-y-8">
-      <Hero />
-      <Main />
-      <Giveaway />
-      <Leaderboard />
-      <Cta />
-    </div>
+    <>
+      <div className="App space-y-8">
+        <Hero />
+        <Main />
+        <Giveaway />
+        <Leaderboard />
+        <Cta />
+      </div>
     </>
   );
 }

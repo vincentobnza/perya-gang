@@ -16,6 +16,7 @@ import { Confetti } from "@/components/magicui/confetti";
 import { useRef } from "react";
 
 import { type ConfettiRef } from "@/components/magicui/confetti";
+import { Play } from "lucide-react";
 
 export function RaffleSpinnerModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +24,7 @@ export function RaffleSpinnerModal() {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button className="bg-[#bdfc06] text-black text-md font-bold">
+          <Play className="size-3" strokeWidth={3} />
           Start
         </Button>
       </DialogTrigger>
