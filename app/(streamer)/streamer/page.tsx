@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import { DateSegmentControlTabs } from "../components/DateSegmentControlTabs";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,7 @@ import Events from "../components/Events";
 import { CreateEvent } from "../components/CreateEvent";
 
 export default function Page({}) {
+
   const rewards = null; // This should be replaced with actual data fetching logic
   return (
     <div>
