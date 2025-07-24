@@ -5,6 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { DialogClose } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import React from "react";
 
@@ -36,9 +37,11 @@ export default function WinnerAlertModal({
             Congratulations! You have won the raffle. 🏆
           </h3>
 
-          <Button className="mt-10 uppercase h-10 bg-main" size="lg">
-            Done
-          </Button>
+          <DialogClose>
+            <Button className="mt-10 uppercase h-10 bg-main" size="lg">
+              Done
+            </Button>
+          </DialogClose>
         </div>
       </DialogContent>
     </Dialog>
