@@ -1,8 +1,8 @@
-'use server'
+"use server";
 import axios from "axios";
 import { apiUrl } from "@/lib/common";
-import { cookies } from 'next/headers';
-import { storeUserData } from '@/lib/hooks/useLocalStorage'
+import { cookies } from "next/headers";
+import { storeUserData } from "@/lib/hooks/useLocalStorage";
 
 export async function LoginAccount(data: any): Promise<{
   success: boolean;
@@ -29,22 +29,21 @@ export async function LoginAccount(data: any): Promise<{
 
     //storeUserData(_user);
 
-    axios.defaults.headers.common['X-Session-Token'] = _user.token;
+    axios.defaults.headers.common["X-Session-Token"] = _user.token;
 
     const encoded = encodedPerya(_user);
 
     (await cookies()).set({
-      name: '_peryaaccount',
+      name: "_peryaaccount",
       value: encoded,
       httpOnly: true,
       secure: true,
-      sameSite: 'lax',
-      path: '/',
+      sameSite: "lax",
+      path: "/",
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     });
 
     return { success: true, message: "Login successful", data: _user };
-
   } catch (error: any) {
     const Err = error?.response?.data;
     const message = Err?.message || "Login failed";
@@ -55,7 +54,7 @@ export async function LoginAccount(data: any): Promise<{
 const encodedPerya = (data: any): string => {
   const jsonString = JSON.stringify(data);
   const uriEncoded = encodeURIComponent(jsonString);
-  const innerBase64 = Buffer.from(unescape(uriEncoded)).toString('base64');
-  const result = 'peryagang-' + Buffer.from(innerBase64).toString('base64');
+  const innerBase64 = Buffer.from(unescape(uriEncoded)).toString("base64");
+  const result = "peryagang-" + Buffer.from(innerBase64).toString("base64");
   return result;
-}
+};
