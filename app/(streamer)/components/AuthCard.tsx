@@ -18,15 +18,16 @@ export default function AuthCard() {
         setToast("Please fill in all fields", "error");
         return;
       }
-      LoginAccount(data, (success, message) => {
-        if (success) {
-          setToast(message, "success");
-         router.push("/streamer");
-        } else {
-          setToast(message, "error");
-        }
-      });
-  
+      const res = await LoginAccount(data);
+
+      if (res.success) {
+        console.log("✅ Login Success");
+        setToast(res.message, "success");
+        // Do something like router.push("/dashboard")
+      } else {
+         setToast(res.message, "error");
+      }
+
   };
     return (
        <>
