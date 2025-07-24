@@ -2,7 +2,7 @@
 import axios from "axios";
 import { apiUrl } from "@/lib/common";
 import { cookies } from 'next/headers';
-import { storeUserData }  from '@/lib/hooks/useLocalStorage';
+import { storeUserData } from '@/lib/hooks/useLocalStorage'
 
 export async function LoginAccount(data: any): Promise<{
   success: boolean;
@@ -14,8 +14,6 @@ export async function LoginAccount(data: any): Promise<{
 
     if (response.status !== 200) {
       return { success: false, message: "Failed to login", data: [] };
-      callback?.(false, "Failed to login");
-      return;
     }
 
     const _user = {
@@ -25,14 +23,6 @@ export async function LoginAccount(data: any): Promise<{
       u_: response.data.data.username,
       id_: response.data.data.id,
       roles: response.data.data.roles,
-      balances: response.data.data.user_balance,
-      token: response.data.data.sessionToken,
-    };
-      status: true,
-      f_: response.data.data.name,
-      e_: response.data.data.email,
-      u_: response.data.data.username,
-      id_: response.data.data.id,
       balances: response.data.data.user_balance,
       token: response.data.data.sessionToken,
     };
