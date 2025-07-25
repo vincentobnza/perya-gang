@@ -25,3 +25,48 @@ export const SAMPLE_USERS = [
     avatarUrl: "/avatar5.png",
   },
 ];
+
+// LIVE COMMENTS
+
+export const LiveComments = [
+  {
+    id: "lc-1",
+    avatar: "/avatar1.png",
+  },
+  {
+    id: "lc-2",
+    avatar: "/avatar2.png",
+  },
+  {
+    id: "lc-3",
+    avatar: "/avatar3.png",
+  },
+  {
+    id: "lc-4",
+    avatar: "/avatar4.png",
+  },
+  {
+    id: "lc-5",
+    avatar: "/avatar5.png",
+  },
+  {
+    id: "lc-6",
+    avatar: "/avatar1.png",
+  },
+  {
+    id: "lc-7",
+    avatar: "/avatar2.png",
+  },
+  {
+    id: "lc-8",
+    avatar: "/avatar3.png",
+  },
+  {
+    id: "lc-9",
+    avatar: "/avatar4.png",
+  },
+  {
+    id: "lc-10",
+    avatar: "/avatar5.png",
+  },
+];

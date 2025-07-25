@@ -1,7 +1,10 @@
+"use client";
+
 import { RaffleScrollModal } from "@/app/(user)/components/RaffleScrollModal";
 import React from "react";
 import Image from "next/image";
 import { useMobile } from "@/hooks/useMobile";
+import LiveComments from "@/app/(user)/components/LiveComments";
 
 export default function StreamingVideo() {
   const isMobile = useMobile();
@@ -26,8 +29,11 @@ export default function StreamingVideo() {
             controls={false}
             loop
           />
+
+          {/* LIve comments */}
         </div>
       </div>
+      <LiveComments />
     </div>
   );
 }

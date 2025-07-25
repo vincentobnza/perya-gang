@@ -1,9 +1,10 @@
 import TextField from "@/components/auth/TextField";
 import { Button } from "@/components/ui/button";
 import RewardList from "./components/RewardList";
-import { CircleStop, Pause } from "lucide-react";
+import { Pause } from "lucide-react";
+import StreamingVideo from "@/components/Streaming-video";
 export default function CreateLive() {
-  const isStreaming = false; // Replace with actual streaming state
+  const isStreaming = true; // Replace with actual streaming state
   return (
     <div className="p-2">
       {/* FIELDS */}
@@ -25,26 +26,17 @@ export default function CreateLive() {
       )}
       <main className="w-full space-y-4">
         {/* MAIN LIVE */}
-        <div className="relative w-full bg-zinc-900 border border-zinc-800 rounded-xl min-h-[70vh] flex items-center justify-center">
+        <div className="relative w-full rounded-xl flex items-center justify-center">
           {isStreaming ? (
-            <iframe
-              className="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/HfGnW_7JaTY?si=Y4bvYZl_CTHHahnV&autoplay=1&mute=1&controls=0"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            />
+            <StreamingVideo />
           ) : (
             <Button size="lg" className="bg-blue-700 text-white font-bold ro">
               Start Live
             </Button>
           )}
         </div>
-
         {isStreaming && (
-          <div className="w-full flex justify-end items-end gap-4">
+          <div className="w-full max-w-screen-lg flex justify-end items-end gap-4">
             <Button size="lg">
               <Pause />
               Pause

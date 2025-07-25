@@ -51,11 +51,9 @@ const RaffleSpinner = () => {
       console.log("Spin complete!");
     },
   });
-
   useEffect(() => {
     startRaffle();
   }, []);
-
   return (
     <div className="relative w-full max-w-sm mx-auto space-y-6 rounded-lg mb-12">
       <audio ref={audioRef} src="/raffle-sound-effect.mp3" preload="auto" />
