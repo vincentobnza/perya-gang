@@ -5,12 +5,45 @@ import React from "react";
 import Image from "next/image";
 import { useMobile } from "@/hooks/useMobile";
 import LiveComments from "@/app/(user)/components/LiveComments";
+import { Avatar } from "./ui/avatar";
+import { AvatarImage } from "@radix-ui/react-avatar";
+import { User } from "lucide-react";
 
 export default function StreamingVideo() {
   const isMobile = useMobile();
   const isTablet = useMobile(820);
   return (
-    <div className="mt-5 md:mt-6 lg:mt-8 mb-12 w-full bg-zinc-900/20 relative">
+    <div className="mt-5 md:mt-6 lg:mt-8 mb-12 w-full bg-zinc-950 relative">
+      <div className="w-full max-w-screen-md mx-auto mb-8 flex justify-between items-center">
+        <div className="flex items-center gap-x-6">
+          <Avatar>
+            <AvatarImage
+              src="/avatar1.png"
+              alt="User Avatar"
+              className="w-10 h-10"
+            />
+          </Avatar>
+
+          <div className="flex flex-col gap-1">
+            <h1>AkosiDogie</h1>
+            <p className="flex items-center gap-2 text-xs font-semibold text-zinc-500">
+              <span
+                className="size-2 rounded-full bg-red-500 inline-block animate-pulse"
+                aria-label="Live indicator"
+              ></span>
+              Live now
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-x-2">
+          <User className="size-4 text-zinc-500" strokeWidth={3} />
+
+          <p className="text-sm font-semibold text-zinc-500 uppercase">
+            100 Viewers
+          </p>
+        </div>
+      </div>
       <RaffleScrollModal />
       {/* SAMPLE VIDEO */}
       <div className="flex justify-center items-center w-full">
@@ -29,11 +62,12 @@ export default function StreamingVideo() {
             controls={false}
             loop
           />
-
-          {/* LIve comments */}
+          {/*  */}
         </div>
       </div>
-      <LiveComments />
+      <div className="mt-10">
+        <LiveComments />
+      </div>
     </div>
   );
 }

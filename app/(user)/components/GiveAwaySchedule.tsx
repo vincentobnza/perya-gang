@@ -1,11 +1,14 @@
 import React from "react";
 import GiveAwayCard from "./GiveAwayCard";
+import Progress from "./Progress";
+import WeeklyProgress from "./Progress";
 
 export default function GiveAwaySchedule() {
   return (
     <div className="mt-10 w-full">
-      <h1 className="text-2xl font-bold">GiveAway Schedule</h1>
-      <div className="w-full grid md:grid-cols-3 gap-4 mt-5">
+      <h1 className="text-2xl font-bold mb-10">GiveAway Schedule</h1>
+      <WeeklyProgress />
+      <div className="w-full grid md:grid-cols-3 gap-4 mt-8">
         {GiveAwayScheduleDumps.map((giveAway, idx) => (
           <GiveAwayCard
             title={giveAway.title}
