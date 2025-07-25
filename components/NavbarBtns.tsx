@@ -40,26 +40,12 @@ export default function NavbarBtns({
 const UserAvatar = () => {
   const router = useRouter();
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <Avatar className="border border-zinc-900 cursor-pointer">
-          <AvatarImage src="/avatar1.png" alt="@avatar" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent
-        align="end"
-        className="self-start w-60 bg-zinc-900 border-none outline-none border border-zinc-800 p-2"
-      >
-        <DropdownMenuLabel className="font-bold text-zinc-400">
-          My Account
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => router.push("/profile")}>
-          Profile
-        </DropdownMenuItem>
-        <DropdownMenuItem>Logout</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Avatar
+      className="border border-zinc-900 cursor-pointer"
+      onClick={() => router.push("/profile")}
+    >
+      <AvatarImage src="/avatar1.png" alt="@avatar" />
+      <AvatarFallback>CN</AvatarFallback>
+    </Avatar>
   );
 };

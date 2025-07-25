@@ -20,7 +20,7 @@ export default function EditProfileDrawer() {
           <Button
             size="icon"
             variant="ghost"
-            className="p-5 md:p-5 mt-4 md:mt-0"
+            className="p-5 md:p-5 mt-4 md:mt-0 rounded-full border border-zinc-900"
           >
             <SquarePen className="text-main size-6" />
           </Button>

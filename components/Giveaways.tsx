@@ -14,7 +14,7 @@ export default function Giveaways() {
 
       <div className="w-full grid md:grid-cols-3 mt-12  gap-4">
         {cardInfo.map((card, idx) => (
-          <GiveawayCards key={idx} card={card} />
+          <GiveawayCards key={idx} card={card} idx={idx} />
         ))}
       </div>
     </Wrapper>
@@ -41,12 +41,25 @@ type CardProps = {
     price: string;
     image: string;
   };
+
+  idx: number;
 };
 
-const GiveawayCards = ({ card }: CardProps) => {
+const GiveawayCards = ({ card, idx }: CardProps) => {
   return (
-    <div
-      className={`w-full relative flex p-8 flex-col justify-start items-start gap-4 rounded-3xl bg-zinc-800/50 border border-zinc-700/50 hover:bg-zinc-800 transition-all duration-300 ease-in-out group`}
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{
+        duration: 0.5,
+        delay: idx * 0.3,
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+      }}
+      viewport={{ once: true }}
+      className={`w-full relative flex p-8 flex-col justify-start items-start gap-4 rounded-3xl bg-gradient-to-br 
+         from-zinc-900 to-zinc-950 border border-zinc-800/70 hover:bg-zinc-800 transition-all duration-300 ease-in-out group`}
     >
       <h1 className="text-3xl font-bold">{card.price}</h1>
       <h3 className="text-sm opacity-70">GCash Credits</h3>
@@ -58,6 +71,6 @@ const GiveawayCards = ({ card }: CardProps) => {
         alt="image"
         className="size-32 md:size-40 absolute -bottom-8 right-0 transition-all duration-300 ease-in-out group-hover:-rotate-12 group-hover:scale-110"
       />
-    </div>
+    </motion.div>
   );
 };

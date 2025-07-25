@@ -37,13 +37,13 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
                 : "password"
               : props.type || "text"
           }
-          autoComplete="off"
+          autoComplete="new-password"
           placeholder={props.placeholder}
           value={props.value}
           onChange={(e) => props.onChange?.(e.target.value)}
           disabled={props.disabled}
           className={cn(
-            "w-full min-w-0 bg-zinc-900 text-white rounded-lg p-3 px-4 h-14 focus:outline-none placeholder:text-sm focus:ring-2 focus:ring-[#BDFC06]",
+            "w-full min-w-0 bg-zinc-900 text-white rounded-lg p-3 px-4 h-14 focus:outline-none placeholder:text-sm focus:ring-2 focus:ring-[#BDFC06] placeholder:text-zinc-500",
             props.type === "password" ? "pr-12" : "",
             props.className
           )}

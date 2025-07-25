@@ -4,6 +4,8 @@ import WinningLogs from "./WinningLogs";
 import ActivityLogs from "./ActivityLogs";
 import { Metadata } from "next";
 import EditProfileDrawer from "./EditProfileDrawer";
+import { Button } from "@/components/ui/button";
+import { LogOut, SquarePen } from "lucide-react";
 
 const user = "John Layda";
 
@@ -28,22 +30,28 @@ const Header = () => {
     username: "@johnlayda",
   };
   return (
-    <div className="w-full flex flex-col md:flex-row items-center md:items-start justify-between gap-6 md:gap-0 pb-8 border-b border-zinc-800">
-      <div></div>
+    <div className="w-full flex flex-col md:flex-row items-center md:items-start justify-between gap-6 md:gap-0 pb-8 border-b border-zinc-900">
+      <div>
+        <Button
+          size="icon"
+          variant="ghost"
+          className="p-5 md:p-5 mt-4 md:mt-0 rounded-full border border-zinc-900"
+        >
+          <LogOut className="text-main size-6" />
+        </Button>
+      </div>
       <div className="flex flex-col items-center gap-2 justify-center">
         <div className="p-0.5 overflow-hidden bg-zinc-900 rounded-full">
           <Avatar className="size-20">
             <AvatarImage src="/avatar1.png"></AvatarImage>
           </Avatar>
         </div>
+
+        <p className="mt-5 text-sm text-zinc-500 font-semibold">Hello!</p>
         <h1 className="text-2xl md:text-3xl font-bold">
           {dummyUserDetails.name}
         </h1>
-        <p className="text-sm text-zinc-500 font-semibold">
-          {dummyUserDetails.username}
-        </p>
       </div>
-
       {/* EDIT PROFILE INFO */}
       <EditProfileDrawer />
     </div>

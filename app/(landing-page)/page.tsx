@@ -8,7 +8,7 @@ import Cta from "@/components/Cta";
 export default function Home() {
   return (
     <>
-      <div className="App space-y-8">
+      <div className="App space-y-8 ">
         <Hero />
         <Main />
         <Giveaway />

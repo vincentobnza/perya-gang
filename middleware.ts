@@ -1,23 +1,27 @@
-'use server'
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import axios from 'axios';
+"use server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import axios from "axios";
 import { apiUrl } from "@/lib/common";
 import useToken from "@/lib/hooks/useToken";
 
 const auth = async () => {
   try {
     const Token = await useToken();
-    const response = await axios.post(apiUrl("auth/user"), {}, {
-      headers: {
-        'X-Session-Token': `${Token.token}`,
-      },
-    });
+    const response = await axios.post(
+      apiUrl("auth/user"),
+      {},
+      {
+        headers: {
+          "X-Session-Token": `${Token.token}`,
+        },
+      }
+    );
     return response;
   } catch (error) {
     throw error;
   }
-}
+};
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
@@ -27,8 +31,8 @@ export async function middleware(request: NextRequest) {
 
   // Allow unauthenticated users to access login page
   if (!Token) {
-    if (path !== '/login') {
-      return NextResponse.redirect(new URL('/login', url));
+    if (path !== "/login") {
+      return NextResponse.redirect(new URL("/login", url));
     } else {
       return NextResponse.next(); // Allow access to /login
     }
@@ -50,19 +54,18 @@ export async function middleware(request: NextRequest) {
     };
 
     axios.defaults.headers.common["X-Session-Token"] = user.token;
-
   } catch (err: any) {
-    console.error('Auth check failed:', err);
-    if (path !== '/login') {
-      return NextResponse.redirect(new URL('/login', url));
+    console.error("Auth check failed:", err);
+    if (path !== "/login") {
+      return NextResponse.redirect(new URL("/login", url));
     } else {
       return NextResponse.next(); // Allow access to /login even on failed auth
     }
   }
 
   if (!user || !user.roles?.name) {
-    if (path !== '/login') {
-      return NextResponse.redirect(new URL('/login', url));
+    if (path !== "/login") {
+      return NextResponse.redirect(new URL("/login", url));
     } else {
       return NextResponse.next();
     }
@@ -70,21 +73,21 @@ export async function middleware(request: NextRequest) {
 
   const role = user.roles?.name;
 
-  const isLogin = path.startsWith('/login');
-  const isPortal = path.startsWith('/portal');
-  const isStreamer = path.startsWith('/streamer');
+  const isLogin = path.startsWith("/login");
+  const isPortal = path.startsWith("/portal");
+  const isStreamer = path.startsWith("/streamer");
 
-  if ((isPortal || isLogin) && role === 'streamer') {
-    return NextResponse.redirect(new URL('/streamer', url));
+  if ((isPortal || isLogin) && role === "streamer") {
+    return NextResponse.redirect(new URL("/streamer", url));
   }
 
-  if ((isStreamer || isLogin) && role !== 'streamer') {
-    return NextResponse.redirect(new URL('/portal', url));
+  if ((isStreamer || isLogin) && role !== "streamer") {
+    return NextResponse.redirect(new URL("/portal", url));
   }
 
   return NextResponse.next(); // Allow navigation
 }
 
 export const config = {
-  matcher: ['/login', '/portal/:path*', '/streamer/:path*'],
+  matcher: ["/login", "/portal/:path*", "/streamer/:path*"],
 };

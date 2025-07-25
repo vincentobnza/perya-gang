@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "motion/react";
 
 type HeadingProps = {
   topText: string;
@@ -14,17 +15,49 @@ export default function Heading({
   description,
 }: HeadingProps & { children?: React.ReactNode }) {
   return (
-    <>
-      <div className="p-2 px-3 primary-color rounded-full bg-main self-start text-black font-bold mb-4">
+    <div className="flex flex-col items-start gap-4 mt-10">
+      <motion.div
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 60,
+          damping: 12,
+          duration: 0.7,
+        }}
+        className="p-2 px-3 primary-color rounded-full bg-main self-start text-black font-bold mb-4"
+      >
         {topText}
-      </div>
+      </motion.div>
 
-      <h1 className="w-3/4 text-3xl md:text-4xl lg:text-7xl font-bold leading-none mb-2">
+      <motion.h1
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 60,
+          damping: 12,
+          duration: 0.7,
+          delay: 0.1,
+        }}
+        className="w-3/4 text-3xl md:text-4xl lg:text-7xl font-bold leading-none mb-2"
+      >
         {title || "Default Title"}
-      </h1>
-      <p className="w-full md:w-1/2 opacity-60 font-medium">
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          type: "spring",
+          stiffness: 60,
+          damping: 12,
+          duration: 0.7,
+          delay: 0.2,
+        }}
+        className="w-full md:w-1/2 opacity-60 font-medium"
+      >
         {description || "Description goes here."}
-      </p>
-    </>
+      </motion.p>
+    </div>
   );
 }

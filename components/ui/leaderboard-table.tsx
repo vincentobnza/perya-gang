@@ -37,13 +37,12 @@ export function LeaderboardTable() {
     <div className="relative">
       {/* overlay */}
 
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-90 rounded-lg"></div>
-
+      <div className="absolute inset-0 bg-zinc-900/50 border border-zinc-800 opacity-90 rounded-lg"></div>
       {/* table */}
       <Table className="w-full">
         {/* TABLE CONTENT */}
         <TableHeader className="rounded-lg">
-          <TableRow className="bg-[#CC00FF]">
+          <TableRow className="bg-[#CC00FF] hover:bg-[#CC00FF]/90 transition-colors">
             <TableHead className="w-[100px] text-white font-bold p-4 text-md md:text-lg">
               RANK
             </TableHead>

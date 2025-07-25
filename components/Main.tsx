@@ -5,6 +5,7 @@ import { ParticipantsTooltip } from "@/components/ui/participants-tooltip";
 import { Gift, MonitorPlay, Pointer, Smartphone } from "lucide-react";
 import Heading from "./Heading";
 import Wrapper from "./Wrapper";
+import { motion } from "motion/react";
 
 export default function Main() {
   return (
@@ -16,7 +17,7 @@ export default function Main() {
       />
       <div className="w-full grid md:grid-cols-2  mt-12  gap-4">
         {cardInfo.map((card, idx) => (
-          <Cards key={idx} card={card} />
+          <Cards key={idx} card={card} idx={idx} />
         ))}
       </div>
     </Wrapper>
@@ -62,6 +63,7 @@ const cardInfo = [
 ];
 
 type CardProps = {
+  idx?: number;
   card: {
     title: string;
     description: string;
@@ -73,9 +75,19 @@ type CardProps = {
   };
 };
 
-const Cards = ({ card }: CardProps) => {
+const Cards = ({ card, idx }: CardProps) => {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{
+        duration: 0.5,
+        delay: idx ? idx * 0.3 : 0,
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+      }}
       className={`w-full relative flex p-6 flex-col justify-start items-start gap-2 rounded-3xl ${card.bgColor}`}
     >
       {card.isBackground && (
@@ -108,6 +120,6 @@ const Cards = ({ card }: CardProps) => {
         <h1 className="w-3/4 text-2xl font-bold">{card.title}</h1>
         <p className=" opacity-70">{card.description}</p>
       </div>
-    </div>
+    </motion.div>
   );
 };

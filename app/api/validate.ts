@@ -1,17 +1,12 @@
-	"use client"
+"use client";
 import axios from "axios";
 import { apiUrl } from "@/lib/common";
 import { storeUserData, getUserData } from "@/lib/hooks/useLocalStorage";
-
-
 
 export async function validateLogin(
   {},
   callback?: (success: boolean, message: string, data: any) => void
 ): Promise<void> {
-
-
-
   try {
     axios.defaults.headers.common["X-Session-Token"] = getUserData().token;
     const response = await axios.post(apiUrl("auth/user"), {});
@@ -29,14 +24,14 @@ export async function validateLogin(
       balances: response.data.user_balance,
       token: getUserData().token,
     };
-    
+
     storeUserData(_user);
 
     const userData = {
       user: _user,
       roles: response.data.roles,
       v: true,
-    }
+    };
 
     axios.defaults.headers.common["X-Session-Token"] = _user.token;
 
