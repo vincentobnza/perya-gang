@@ -21,7 +21,7 @@ export default function DeleteEventModal() {
         </DialogTrigger>
         <DialogContent className="sm:max-w-lg bg-zinc-900 outline-none rounded-2xl border border-zinc-700/50">
           <DialogHeader>
-            <DialogTitle className="text-xl">Delete Event?</DialogTitle>
+            <DialogTitle className="text-xl">Delete Reward?</DialogTitle>
           </DialogHeader>
 
           <div className="w-ful rounded-lg mb-4">

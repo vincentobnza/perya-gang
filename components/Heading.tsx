@@ -40,7 +40,7 @@ export default function Heading({
           duration: 0.7,
           delay: 0.1,
         }}
-        className="w-3/4 text-3xl md:text-4xl lg:text-7xl font-bold leading-none mb-2"
+        className="w-[80%] text-3xl md:text-4xl lg:text-7xl font-bold leading-none mb-2"
       >
         {title || "Default Title"}
       </motion.h1>
@@ -54,7 +54,7 @@ export default function Heading({
           duration: 0.7,
           delay: 0.2,
         }}
-        className="w-full md:w-1/2 opacity-60 font-medium"
+        className="w-full md:w-3/4 text-zinc-300 font-medium"
       >
         {description || "Description goes here."}
       </motion.p>

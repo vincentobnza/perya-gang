@@ -15,6 +15,20 @@ const rethink = Rethink_Sans({
 export const metadata: Metadata = {
   title: "Streamer - Perya Gang",
   description: "A platform for streamers to connect and collaborate",
+  openGraph: {
+    title: "Perya Gang Streamer",
+    description: "Get Rewarded Like Never Before",
+    // url: "https://perya-gang.vercel.app", // REPLACE THIS WITH ACTUAL URL
+    siteName: "Perya Gang",
+    images: [
+      {
+        url: "",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: "website",
+  },
 };
 export default function RootLayout({
   children,

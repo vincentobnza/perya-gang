@@ -3,7 +3,7 @@ import GiveAwayCard from "./GiveAwayCard";
 
 export default function GiveAwaySchedule() {
   return (
-    <div className="w-full">
+    <div className="mt-10 w-full">
       <h1 className="text-2xl font-bold">GiveAway Schedule</h1>
       <div className="w-full grid md:grid-cols-3 gap-4 mt-5">
         {GiveAwayScheduleDumps.map((giveAway, idx) => (

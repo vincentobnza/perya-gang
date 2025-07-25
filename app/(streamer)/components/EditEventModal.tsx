@@ -27,11 +27,16 @@ export function EditEventDialogModal() {
           {/* FIELDS */}
           <div className="mt-6 w-full">
             <TextField
-              label="Set Entry Requirements Amount"
-              placeholder="entry rewards"
+              label="Event Title"
+              placeholder="Untitled Event"
               className="w-full mb-4 bg-zinc-800/50 border border-zinc-700/50"
             />
-
+            <TextField
+              label="Set Minimum Deposit"
+              placeholder="entry rewards"
+              className="w-full mb-4 bg-zinc-800/50 border border-zinc-700/50"
+              value="0"
+            />
             {/* CALENDAR INPUT */}
 
             <CalendarInput label="Start Date" placeholder="Select start date" />

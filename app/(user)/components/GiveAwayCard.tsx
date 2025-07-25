@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowUpRight, Clock, Gift } from "lucide-react";
 import { RaffleMechanicsModal } from "./RaffleMechanicsModal";
 import { ParticipantsTooltip } from "@/components/ui/participants-tooltip";
+import { ViewAllModal } from "./ViewAllModal";
 
 type GiveAwayCardProps = {
   title: string;
@@ -62,10 +63,7 @@ export default function GiveAwayCard({
               </div>
             </div>
           </div>
-          <button className="text-xs opacity-80 cursor-pointer text-zinc-400 font-semibold mr-2  transition-opacity flex items-center gap-x-2 hover:opacity-80">
-            <ArrowUpRight className="size-4" />
-            View All
-          </button>
+          <ViewAllModal />
         </div>
         <div className="space-y-2">
           <div className="flex items-center gap-x-6">

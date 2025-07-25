@@ -46,7 +46,7 @@ export function RaffleMechanicsModal() {
               Earn points every time you watch streams, send messages
               <br /> and join giveaways.
             </DialogDescription>
-            <div className="overflow-hidden max-h-[400px] overflow-y-auto">
+            <div className="overflow-hidden max-h-[400px] overflow-y-auto relative">
               <div className="mt-4 w-full flex flex-col gap-3">
                 {Mechanics.map((item, index) => (
                   <Card
