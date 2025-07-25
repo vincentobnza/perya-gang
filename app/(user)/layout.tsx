@@ -14,6 +14,26 @@ const rethink = Rethink_Sans({
 export const metadata: Metadata = {
   title: "Stream - Perya Gang",
   description: "Watch live streams from Perya Gang",
+  openGraph: {
+    title: "Perya Gang Stream",
+    description: "Get Rewarded Like Never Before",
+    // url: "https://perya-gang.vercel.app", // REPLACE THIS WITH ACTUAL URL
+    siteName: "Perya Gang",
+    images: [
+      {
+        url: "",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Perya Gang Stream",
+    description: "Get Rewarded Like Never Before",
+    images: [""], // REPLACE THIS WITH ACTUAL IMAGE URL
+  },
 };
 export default function RootLayout({
   children,

@@ -36,8 +36,7 @@ export function LeaderboardTable() {
   return (
     <div className="relative">
       {/* overlay */}
-
-      <div className="absolute inset-0 bg-zinc-900/50 border border-zinc-800 opacity-90 rounded-lg"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-900 opacity-90 rounded-lg"></div>
       {/* table */}
       <Table className="w-full">
         {/* TABLE CONTENT */}
@@ -62,7 +61,9 @@ export function LeaderboardTable() {
               </TableCell>
               <TableCell className=" p-2">
                 <h1 className="text-lg font-semibold">{invoice.name}</h1>
-                <p className="text-sm opacity-60">user@{invoice.id}</p>
+                <p className="text-xs md:text-sm opacity-50">
+                  user@{invoice.id}
+                </p>
               </TableCell>
               <TableCell className="text-lg font-bold text-[#CC00FF] p-2">
                 {invoice.user}
@@ -71,6 +72,8 @@ export function LeaderboardTable() {
           ))}
         </TableBody>
       </Table>
+
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-zinc-950 to-transparent pointer-events-none rounded-b-lg"></div>
     </div>
   );
 }

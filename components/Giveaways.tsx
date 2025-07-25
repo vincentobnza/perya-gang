@@ -61,7 +61,9 @@ const GiveawayCards = ({ card, idx }: CardProps) => {
       className={`w-full relative flex p-8 flex-col justify-start items-start gap-4 rounded-3xl bg-gradient-to-br 
          from-zinc-900 to-zinc-950 border border-zinc-800/70 hover:bg-zinc-800 transition-all duration-300 ease-in-out group`}
     >
-      <h1 className="text-3xl font-bold">{card.price}</h1>
+      <h1 className="text-2xl md:text-2xl lg:text-3xl font-bold">
+        {card.price}
+      </h1>
       <h3 className="text-sm opacity-70">GCash Credits</h3>
 
       {/* floating image */}
@@ -69,7 +71,7 @@ const GiveawayCards = ({ card, idx }: CardProps) => {
       <img
         src={card.image}
         alt="image"
-        className="size-32 md:size-40 absolute -bottom-8 right-0 transition-all duration-300 ease-in-out group-hover:-rotate-12 group-hover:scale-110"
+        className="size-32 md:size-28 lg:size-40 absolute -bottom-8 right-0 transition-all duration-300 ease-in-out group-hover:-rotate-12 group-hover:scale-110"
       />
     </motion.div>
   );
