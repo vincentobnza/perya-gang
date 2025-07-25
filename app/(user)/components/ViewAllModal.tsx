@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/table";
 import { ArrowUpRight } from "lucide-react";
 
-const invoices = [
+const users = [
   {
     id: "1223456",
     name: "Kin Patrick",
@@ -39,6 +39,16 @@ const invoices = [
     name: "John Doe",
     user: 40000,
   },
+  {
+    id: "456789",
+    name: "Jane Smith",
+    user: 25000,
+  },
+  {
+    id: "567890",
+    name: "Alice Johnson",
+    user: 15000,
+  },
 ];
 
 export function ViewAllModal() {
@@ -51,7 +61,7 @@ export function ViewAllModal() {
             View All
           </button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-screen-lg bg-zinc-900 border-none outline-none rounded p-8">
+        <DialogContent className="sm:max-w-screen-lg max-h-[80vh] overflow-auto bg-zinc-900 outline-none rounded-xl border border-zinc-800 p-8 ">
           <DialogHeader>
             <DialogTitle>All Participants</DialogTitle>
             <DialogDescription>
@@ -59,41 +69,42 @@ export function ViewAllModal() {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="w-full">
-            <Table className="w-full">
+          <div className="mt-4 w-full relative">
+            <Table className="w-full border border-zinc-800/50 rounded-lg">
               {/* TABLE CONTENT */}
               <TableHeader className="rounded-lg">
-                <TableRow className="bg-[#CC00FF] hover:bg-[#CC00FF]/90 transition-colors">
-                  <TableHead className="w-[100px] text-white font-bold p-4 text-md md:text-lg">
+                <TableRow className="bg-main border border-lime-400">
+                  <TableHead className="w-[100px] font-bold p-2 text-md text-xs md:text-sm">
                     RANK
                   </TableHead>
-                  <TableHead className="font-bold text-white p-4 text-md md:text-lg">
+                  <TableHead className="font-bold p-2 text-md text-xs md:text-sm">
                     MEMBER
                   </TableHead>
-                  <TableHead className="font-bold text-white p-4 text-md md:text-lg">
+                  <TableHead className="font-bold p-2 text-md text-xs md:text-sm text-center">
                     USER
                   </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {invoices.map((invoice, idx) => (
+                {users.map((invoice, idx) => (
                   <TableRow key={invoice.id}>
-                    <TableCell className=" text-main font-bold text-lg p-2">
+                    <TableCell className=" text-main font-bold text-sm">
                       # {idx + 1}
                     </TableCell>
-                    <TableCell className=" p-2">
-                      <h1 className="text-lg font-semibold">{invoice.name}</h1>
+                    <TableCell>
+                      <h1 className="text-sm font-semibold">{invoice.name}</h1>
                       <p className="text-xs md:text-sm opacity-50">
                         user@{invoice.id}
                       </p>
                     </TableCell>
-                    <TableCell className="text-lg font-bold text-[#CC00FF] p-2">
+                    <TableCell className="text-sm font-bold text-main text-center p-2">
                       {invoice.user}
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
+            <div className="absolute bottom-0 left-0 right-0 h-60 bg-gradient-to-t from-zinc-900 to-transparent pointer-events-none rounded-b-lg"></div>
           </div>
         </DialogContent>
       </form>

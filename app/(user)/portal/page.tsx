@@ -6,6 +6,7 @@ import GiveAwaySchedule from "../components/GiveAwaySchedule";
 import Leaderboard from "@/components/Leaderboard";
 import Heading from "@/components/Heading";
 import { LeaderboardTable } from "@/components/ui/leaderboard-table";
+import RaffleModal from "../components/RaffleModal";
 
 export default function Portal() {
   return (
@@ -25,6 +26,9 @@ export default function Portal() {
           </div>
         </div>
       </main>
+
+      {/* RAFFLE MODAL FOR USERS */}
+      <RaffleModal />
     </div>
   );
 }

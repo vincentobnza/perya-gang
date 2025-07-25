@@ -33,9 +33,7 @@ export function RaffleMechanicsModal() {
     <div>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <Button className="bg-[#bdfc06] text-black text-md font-bold">
-            Join Raffle
-          </Button>
+          <Button className="bg-main  text-md font-bold">Join Raffle</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-xl bg-zinc-900 border-none">
           <DialogHeader>

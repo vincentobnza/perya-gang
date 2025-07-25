@@ -15,6 +15,8 @@ import { Confetti } from "@/components/magicui/confetti";
 import { type ConfettiRef } from "@/components/magicui/confetti";
 import { Play } from "lucide-react";
 import WinnerAlertModal from "./WinnerAlertModal";
+import { SAMPLE_USERS } from "@/data/dummy-data";
+import { useRaffle } from "@/hooks/useRaffle";
 
 export function RaffleSpinnerModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,11 +46,9 @@ export function RaffleSpinnerModal() {
             </DialogTitle>
           </DialogHeader>
           <Raffle
-            isOpen={isOpen}
             setIsOpen={setIsOpen}
             setIsWinnerModalOpen={setIsWinnerModalOpen}
             setIsRolling={setIsRolling}
-            isRolling={isRolling}
           />
           <RaffleParticipants />
         </DialogContent>
@@ -63,89 +63,40 @@ export function RaffleSpinnerModal() {
 }
 
 const Raffle = ({
-  isOpen,
   setIsOpen,
   setIsWinnerModalOpen,
   setIsRolling,
-  isRolling,
 }: {
-  isOpen: boolean;
   setIsOpen: (open: boolean) => void;
   setIsWinnerModalOpen: (open: boolean) => void;
   setIsRolling: (val: boolean) => void;
-  isRolling: boolean;
 }) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number | null>(null);
-  const [selectedWinner, setSelectedWinner] = useState<string | null>(null);
-  const confettiRef = useRef<ConfettiRef>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  const VISIBLE_COUNT = Math.floor(VISIBLE_HEIGHT / ITEM_HEIGHT);
-  const CENTER_OFFSET = Math.floor(VISIBLE_COUNT / 2);
-  const loopedList = Array.from({ length: 20 }, () => SAMPLE_USERS).flat();
-  const centerIndex = Math.floor(loopedList.length / 2);
-
-  const handleStartRaffle = () => {
-    setIsRolling(true);
-    setSelectedWinner(null);
-
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0;
-      audioRef.current.play().catch((e) => console.error("Audio error:", e));
-    }
-
-    const winnerIndex = Math.floor(Math.random() * SAMPLE_USERS.length);
-    const winnerFinalIndex =
-      centerIndex - (centerIndex % SAMPLE_USERS.length) + winnerIndex;
-
-    const targetScrollTop = (winnerFinalIndex - CENTER_OFFSET) * ITEM_HEIGHT;
-    const start = performance.now();
-
-    function animate(now: number) {
-      const elapsed = now - start;
-      const t = Math.min(elapsed / ROLL_DURATION, 1);
-      const easeOut = (x: number) => 1 - Math.pow(1 - x, 3);
-      const easedT = easeOut(t);
-
-      const scrollTop = targetScrollTop * easedT;
-      if (scrollRef.current) {
-        scrollRef.current.scrollTop = scrollTop;
-      }
-
-      if (t < 1) {
-        animationRef.current = requestAnimationFrame(animate);
-      } else {
+  const {
+    scrollRef,
+    confettiRef,
+    audioRef,
+    selectedWinner,
+    isRolling,
+    startRaffle,
+    loopedList,
+  } = useRaffle({
+    users: SAMPLE_USERS,
+    visibleHeight: VISIBLE_HEIGHT,
+    itemHeight: ITEM_HEIGHT,
+    rollDuration: ROLL_DURATION,
+    onDone: (winner) => {
+      setTimeout(() => {
+        setIsOpen(false);
         setTimeout(() => {
-          if (scrollRef.current) {
-            scrollRef.current.scrollTop = targetScrollTop;
-          }
-          setIsRolling(false);
-          setSelectedWinner(SAMPLE_USERS[winnerIndex].username);
-
-          if (audioRef.current) {
-            audioRef.current.pause();
-            audioRef.current.currentTime = 0;
-          }
-
-          setTimeout(() => {
-            setIsOpen(false);
-            setTimeout(() => {
-              setIsWinnerModalOpen(true);
-            }, 500);
-          }, 2000);
-        }, 100);
-      }
-    }
-
-    animationRef.current = requestAnimationFrame(animate);
-  };
+          setIsWinnerModalOpen(true);
+        }, 500);
+      }, 2000);
+    },
+  });
 
   useEffect(() => {
-    return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
-    };
-  }, []);
+    setIsRolling(isRolling);
+  }, [isRolling]);
 
   return (
     <div className="relative w-full max-w-sm mx-auto p-2 space-y-6 rounded-lg shadow-[2px_4px_16px_0px_rgba(24, 24, 27,0.06)_inset]">
@@ -155,9 +106,7 @@ const Raffle = ({
           <Confetti
             ref={confettiRef}
             className="absolute left-0 top-0 z-0 size-full"
-            onMouseEnter={() => {
-              confettiRef.current?.fire({});
-            }}
+            onMouseEnter={() => confettiRef.current?.fire({})}
           />
         )}
         <div
@@ -208,7 +157,7 @@ const Raffle = ({
       <Button
         className="bg-main mx-auto w-full text-md"
         size="lg"
-        onClick={handleStartRaffle}
+        onClick={startRaffle}
         disabled={isRolling}
       >
         {isRolling ? "Rolling..." : "Start Raffle"}
@@ -273,33 +222,5 @@ const RaffleParticipants = () => {
     </div>
   );
 };
-
-const SAMPLE_USERS = [
-  {
-    name: "Dennis Onay",
-    username: "dennis742378",
-    avatarUrl: "/avatar1.png",
-  },
-  {
-    name: "Kin Patrick",
-    username: "kin13316",
-    avatarUrl: "/avatar2.png",
-  },
-  {
-    name: "Alice Johnson",
-    username: "user1234",
-    avatarUrl: "/avatar3.png",
-  },
-  {
-    name: "Bob Brown",
-    username: "bobbrown1234567",
-    avatarUrl: "/avatar4.png",
-  },
-  {
-    name: "Charlie White",
-    username: "charliewhite7654321",
-    avatarUrl: "/avatar5.png",
-  },
-];
 
 export default RaffleSpinnerModal;
