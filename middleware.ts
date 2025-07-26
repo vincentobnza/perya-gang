@@ -52,7 +52,7 @@ export async function middleware(request: NextRequest) {
       balances: response.data.user_balance,
       token: Token.token,
     };
-
+    
     axios.defaults.headers.common["X-Session-Token"] = user.token;
   } catch (err: any) {
     console.error("Auth check failed:", err);

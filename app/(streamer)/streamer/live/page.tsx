@@ -1,10 +1,37 @@
+'use client'
 import TextField from "@/components/auth/TextField";
 import { Button } from "@/components/ui/button";
 import RewardList from "./components/RewardList";
 import { Pause } from "lucide-react";
 import StreamingVideo from "@/components/Streaming-video";
+import { getToken } from "@/lib/hooks/useLocalStorage";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { 
+  getStreamerInfo
+} from "@/app/api/streamer/stream_setup";
+
 export default function CreateLive() {
-  const isStreaming = true; // Replace with actual streaming state
+
+    const queryClient = useQueryClient()
+  
+    const { data: streamInfo, isLoading: isLoadingEvents } = useQuery({
+      queryKey: ["streamInfo"],
+      queryFn: getStreamerInfo
+    });
+
+  console.log("Events:", streamInfo);
+  const isStreaming = false; // Replace with actual streaming state
+
+  try {
+
+
+
+
+  } catch(err: any) {
+
+  }
+
+ 
   return (
     <div className="p-2">
       {/* FIELDS */}
@@ -19,8 +46,10 @@ export default function CreateLive() {
           />
           <TextField
             label="Stream URL"
-            placeholder="e.g. rtmp://live-api.socia-dev.com/stream"
+            name="stream_url"
             className="w-full mb-4"
+            value="rtmp://perya-live.socia-dev.com/stream"
+            disabled
           />
         </div>
       )}
