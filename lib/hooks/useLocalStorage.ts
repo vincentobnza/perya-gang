@@ -1,4 +1,5 @@
 'use client';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 export function storeUserData(_user: any) {
@@ -24,3 +25,9 @@ export function getUserData() {
   return null;
 }
 
+export function getToken() {
+    const user = getUserData();
+    if (user && user.token) {
+        axios.defaults.headers.common["X-Session-Token"] = user.token;
+    }
+}

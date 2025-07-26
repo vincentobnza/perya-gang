@@ -44,11 +44,13 @@ export function CreateEvent() {
             {/* CALENDAR INPUT */}
 
             <CalendarInput label="Start Date" placeholder="Select start date" />
+            <CalendarInput label="End Date" placeholder="Select end date" />
             <TextField
               label="Rewards #1"
               placeholder="entry rewards"
               className="w-full mb-4 bg-zinc-800/50 border border-zinc-700/50"
             />
+            
           </div>
           <DialogFooter className="w-full ">
             <div className="w-full flex justify-between items-center">
@@ -88,9 +90,9 @@ export const CalendarInput = ({
       )}
       <div className="w-full min-w-0 flex items-center gap-3 mb-4 relative">
         <input
-          type="time"
+          type="datetime-local"
           placeholder={placeholder}
-          className="w-full bg-zinc-800/50 border border-zinc-700/50 text-zinc-400 rounded-lg p-3 px-4 h-14 focus:outline-none placeholder:text-sm focus:ring-2 focus:ring-[#BDFC06] pr-12 [&::-webkit-calendar-picker-indicator]:hidden"
+          className="w-full bg-zinc-800/50 border border-zinc-700/50 text-zinc-400 rounded-lg p-3 px-4 h-14 focus:outline-none placeholder:text-sm focus:ring-2 focus:ring-[#BDFC06] pr-12"
         />
         <span className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
           <Calendar className="size-5 text-main opacity-60" />
