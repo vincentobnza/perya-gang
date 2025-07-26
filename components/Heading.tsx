@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 type HeadingProps = {
   topText: string;
   title?: string;
+  title2?: string;
   description?: string;
   children?: React.ReactNode;
   isColor?: boolean;
@@ -12,6 +13,7 @@ type HeadingProps = {
 export default function Heading({
   topText,
   title,
+  title2,
   description,
 }: HeadingProps & { children?: React.ReactNode }) {
   return (
@@ -29,7 +31,6 @@ export default function Heading({
       >
         {topText}
       </motion.div>
-
       <motion.h1
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -40,9 +41,10 @@ export default function Heading({
           duration: 0.7,
           delay: 0.1,
         }}
-        className="w-[80%] text-3xl md:text-4xl lg:text-7xl font-bold leading-none mb-2"
+        className="w-[70%] text-3xl md:text-4xl lg:text-7xl font-bold leading-none mb-2"
       >
-        {title || "Default Title"}
+        {title || "Default Title"} <br />
+        <span>{title2}</span>
       </motion.h1>
       <motion.p
         initial={{ opacity: 0, y: -40 }}

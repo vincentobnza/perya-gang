@@ -12,7 +12,8 @@ export default function Main() {
     <Wrapper>
       <Heading
         topText="🛠️ Mechanics"
-        title="How to Participate in Giveaways"
+        title="How to"
+        title2="Join a Giveaway"
         description="Follow these steps to join and win exciting giveaways!"
       />
       <div className="w-full grid md:grid-cols-2  mt-12  gap-4">

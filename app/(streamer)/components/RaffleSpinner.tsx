@@ -85,12 +85,8 @@ const Raffle = ({
     itemHeight: ITEM_HEIGHT,
     rollDuration: ROLL_DURATION,
     onDone: (winner) => {
-      setTimeout(() => {
-        setIsOpen(false);
-        setTimeout(() => {
-          setIsWinnerModalOpen(true);
-        }, 500);
-      }, 2000);
+      setIsOpen(false);
+        setIsWinnerModalOpen(true);
     },
   });
 

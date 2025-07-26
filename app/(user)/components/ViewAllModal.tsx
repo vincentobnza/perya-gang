@@ -16,7 +16,7 @@ import {
   TableCell,
   Table,
 } from "@/components/ui/table";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Users } from "lucide-react";
 
 const users = [
   {
@@ -56,9 +56,11 @@ export function ViewAllModal() {
     <Dialog>
       <form>
         <DialogTrigger asChild>
-          <button className="text-xs opacity-80 cursor-pointer text-zinc-400 font-semibold mr-2  transition-opacity flex items-center gap-x-2 hover:opacity-80">
-            <ArrowUpRight className="size-4" />
-            View All
+          <button className="text-xs opacity-80 rounded-full px-4 py-2 border border-zinc-800/90 cursor-pointer text-zinc-400 font-semibold mr-2  transition-opacity flex items-center gap-x-2 hover:opacity-80">
+            <Users className="size-3" strokeWidth={3} />
+            {/*   REPLACE THIS WITH THE ACTUAL PARTICIPANT COUNT */}
+            <span className="text-white">48</span>
+            Participants
           </button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-screen-lg max-h-[80vh] overflow-auto bg-zinc-900 outline-none rounded-xl border border-zinc-800 p-8 ">

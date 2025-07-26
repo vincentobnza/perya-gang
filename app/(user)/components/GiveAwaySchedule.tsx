@@ -5,10 +5,10 @@ import WeeklyProgress from "./Progress";
 
 export default function GiveAwaySchedule() {
   return (
-    <div className="mt-10 w-full">
-      <h1 className="text-2xl font-bold mb-10">GiveAway Schedule</h1>
+    <div className=" mt-16 w-full">
+      <h1 className="text-2xl font-bold mb-5">GiveAway Schedule</h1>
       <WeeklyProgress />
-      <div className="w-full grid md:grid-cols-3 gap-4 mt-8">
+      <div className="w-full grid md:grid-cols-3 gap-4 mt-4 ">
         {GiveAwayScheduleDumps.map((giveAway, idx) => (
           <GiveAwayCard
             title={giveAway.title}
@@ -18,6 +18,7 @@ export default function GiveAwaySchedule() {
             endTime={giveAway.endTime}
             cashGiveAways={giveAway.cashGiveAways}
             entryRequirements={giveAway.entryRequirements}
+            isJoined={giveAway.isJoined}
           />
         ))}
       </div>
@@ -31,6 +32,7 @@ const GiveAwayScheduleDumps = [
     startTime: "1:00 PM",
     endTime: "2:00 PM",
     cashGiveAways: "₱5,000 GCash + Surprise Mystery Box",
+    isJoined: true,
   },
   {
     title: "Mystery Box Mega Hour",
@@ -40,6 +42,7 @@ const GiveAwayScheduleDumps = [
     cashGiveAways: "₱10,000 GCash + Surprise Mystery Box",
     entryRequirements:
       "To qualify for the giveaway, just cash in at least ₱5000  on any of our casino games.",
+    isJoined: false,
   },
   {
     title: "Golden Hour Raffle",
@@ -49,6 +52,7 @@ const GiveAwayScheduleDumps = [
     cashGiveAways: "₱15,000 GCash + Surprise Mystery Box",
     entryRequirements:
       "To qualify for the giveaway, just cash in at least ₱2000  on any of our casino games.",
+    isJoined: true,
   },
   {
     title: "Raffle Royale",
@@ -58,6 +62,7 @@ const GiveAwayScheduleDumps = [
     cashGiveAways: "₱5,000 GCash + Surprise Mystery Box",
     entryRequirements:
       "To qualify for the giveaway, just cash in at least ₱5000  on any of our casino games.",
+    isJoined: true,
   },
   {
     title: "Lucky ₱2K Roll",
@@ -65,6 +70,7 @@ const GiveAwayScheduleDumps = [
     startTime: "2:00 PM",
     endTime: "3:00 PM",
     cashGiveAways: "₱10,000 GCash + Surprise Mystery Box",
+    isJoined: false,
   },
   {
     title: "GCash Grand Giveaway ",
@@ -74,5 +80,6 @@ const GiveAwayScheduleDumps = [
     cashGiveAways: "₱15,000 GCash + Surprise Mystery Box",
     entryRequirements:
       "To qualify for the giveaway, just cash in at least ₱2000  on any of our casino games.",
+    isJoined: false,
   },
 ];

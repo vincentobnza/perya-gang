@@ -7,11 +7,12 @@ import Leaderboard from "@/components/Leaderboard";
 import Heading from "@/components/Heading";
 import { LeaderboardTable } from "@/components/ui/leaderboard-table";
 import RaffleModal from "../components/RaffleModal";
+import StreamingVideoDesktop from "../components/StreamingVideoDesktop";
 
 export default function Portal() {
   return (
     <div>
-      <StreamingVideo />
+      <StreamingVideoDesktop />
       <div className="space-y-10">
         <main className="w-full flex flex-col items-start max-w-screen-xl mx-auto">
           <GiveAwaySchedule />

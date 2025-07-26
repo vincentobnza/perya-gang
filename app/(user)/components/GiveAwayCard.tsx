@@ -21,45 +21,27 @@ export default function GiveAwayCard({
   endTime,
   cashGiveAways,
   entryRequirements,
+  isJoined = true,
 }: GiveAwayCardProps) {
   return (
-    <div className="w-full rounded-2xl bg-zinc-900 border border-zinc-800 shadow-xl">
+    <div className="w-full rounded-2xl bg-zinc-900/50 border border-zinc-800/70 shadow-xl">
       <div className="w-full flex items-center justify-between p-5 border-b border-zinc-800">
         <h1 className="text-lg font-medium text-zinc-300">{title}</h1>
-        <RaffleMechanicsModal />
-      </div>
-
-      <div className="p-5">
-        {entryRequirements && (
-          <div className="w-full p-5 bg-gradient-to-bl from-[#212121]/10 to-[#212121]/50 rounded-lg border border-zinc-700/50 mb-5">
-            <h3 className="text-sm font-medium">Entry Requirements</h3>
-            <p className="text-sm text-zinc-300 mt-4">
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: entryRequirements.replace(
-                    /(₱\d{1,10}(?:,\d{3})*)/,
-                    '<span style="color: #ccff00; font-weight: bold;">$1</span>'
-                  ),
-                }}
-              />
-            </p>
-          </div>
+        {isJoined ? (
+          <button className="opacity-80 rounded-full px-4 h-9 border border-zinc-800 bg-zinc-800/50 cursor-pointer text-zinc-400  mr-2  transition-opacity flex items-center gap-x-2 hover:opacity-80 text-sm">
+            Joined
+          </button>
+        ) : (
+          <RaffleMechanicsModal />
         )}
-
+      </div>
+      <div className="p-5">
         <div className="w-full flex justify-between items-center">
           <div className="flex justify-center items-start space-y-2 mb-8 flex-col">
             <h1 className="text-md opacity-70 font-medium">Participants</h1>
             <div className="flex space-x-7">
               <div>
                 <ParticipantsTooltip size="size-8" />
-              </div>
-              <div className="border-l-2 border-zinc-700 pl-3 flex items-center">
-                <h3 className="text-lg font-semibold text-zinc-600">
-                  {counting}
-                  <span className="ml-1 text-[8px] tracking-wide pb-1">
-                    Active
-                  </span>
-                </h3>
               </div>
             </div>
           </div>
@@ -82,6 +64,22 @@ export default function GiveAwayCard({
               {cashGiveAways || "₱0 GCash + No Mystery Box"}
             </h3>
           </div>
+
+          {entryRequirements && (
+            <div className="mt-6 w-full p-5 bg-gradient-to-bl from-[#212121]/10 to-[#212121]/50 rounded-lg border border-zinc-700/20 mb-5">
+              <h3 className="text-sm font-medium">Entry Requirements</h3>
+              <p className="text-sm text-zinc-600 mt-4">
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: entryRequirements.replace(
+                      /(₱\d{1,10}(?:,\d{3})*)/,
+                      '<span style="color: #ccff00; font-weight: semibold;">$1</span>'
+                    ),
+                  }}
+                />
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import AddRewardsModal from "@/app/(streamer)/components/AddRewardsModal";
 
 export default function RewardList() {
   return (
-    <div className="mt-8 w-full space-y-4">
+    <div className="mt-16 w-full space-y-4">
       <Header />
       <main className="w-full space-y-2">
         {rewards.map((reward, index) => (

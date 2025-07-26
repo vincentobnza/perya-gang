@@ -8,10 +8,10 @@ export default function Giveaways() {
     <Wrapper>
       <Heading
         topText="🎁  Ongoing Giveaways"
-        title="Watch. Engage. Win."
+        title="Watch."
+        title2="Engage. Win."
         description="Join our exclusive streamer giveaways and get the chance to win epic rewards from merch, supplements, to surprise loot drops!"
       />
-
       <div className="w-full grid md:grid-cols-3 mt-12  gap-4">
         {cardInfo.map((card, idx) => (
           <GiveawayCards key={idx} card={card} idx={idx} />

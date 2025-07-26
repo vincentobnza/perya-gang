@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import RewardList from "./components/RewardList";
 import { Pause } from "lucide-react";
 import StreamingVideo from "@/components/Streaming-video";
+import StreamingVideoDesktop from "@/components/Streaming-video";
 export default function CreateLive() {
   const isStreaming = true; // Replace with actual streaming state
   return (
@@ -28,7 +29,7 @@ export default function CreateLive() {
         {/* MAIN LIVE */}
         <div className="relative w-full rounded-xl flex items-center justify-center">
           {isStreaming ? (
-            <StreamingVideo />
+            <StreamingVideoDesktop />
           ) : (
             <Button size="lg" className="bg-blue-700 text-white font-bold ro">
               Start Live
@@ -36,7 +37,7 @@ export default function CreateLive() {
           )}
         </div>
         {isStreaming && (
-          <div className="w-full max-w-screen-lg flex justify-end items-end gap-4">
+          <div className="w-full max-w-screen-xl flex justify-end items-end gap-4">
             <Button size="lg">
               <Pause />
               Pause

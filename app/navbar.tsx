@@ -24,10 +24,6 @@ export default function NavbarClient() {
         </div>
 
         <div className="relative">
-          {/* OVERLAY BOTTOM TEXT */}
-          <h1 className="absolute inset-0 font-bold flex items-center justify-center text-4xl md:text-5xl lg:text-6xl opacity-[2%]">
-            WELCOME
-          </h1>
           {isLogin && (
             <h1 className="text-sm md:text-lg font-bold opacity-90 z-10 bg-gradient-to-r from-zinc-600 via-zinc-100 to-zinc-600 bg-clip-text text-transparent">
               Hello, {user.f_}!

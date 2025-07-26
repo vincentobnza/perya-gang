@@ -28,7 +28,6 @@ export function RaffleMechanicsModal() {
     setIsOpen(false);
     setShowSuccess(true);
   };
-
   return (
     <div>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -45,7 +44,7 @@ export function RaffleMechanicsModal() {
               <br /> and join giveaways.
             </DialogDescription>
             <div className="overflow-hidden max-h-[400px] overflow-y-auto relative">
-              <div className="mt-4 w-full flex flex-col gap-3">
+              <div className="mt-4 w-full flex flex-col gap-1.5">
                 {Mechanics.map((item, index) => (
                   <Card
                     key={index}

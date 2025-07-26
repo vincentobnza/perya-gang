@@ -26,7 +26,7 @@ export default function LiveComments() {
   };
 
   return (
-    <div className="w-full max-w-[51rem] mx-auto h-96 -mt-2 bg-zinc-950 z-50 relative overflow-hidden">
+    <div className="w-full max-w-sm mx-auto h-96 -mt-2 bg-zinc-950 z-50 relative overflow-hidden">
       {/* Comments container */}
 
       <div className="h-full overflow-y-auto px-4 py-2 space-y-2 pb-18">
