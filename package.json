@@ -20,6 +20,7 @@
     "@radix-ui/react-tabs": "^1.1.12",
     "@tanstack/react-query": "^5.83.0",
     "@types/canvas-confetti": "^1.9.0",
+    "@types/video.js": "^7.3.58",
     "axios": "^1.11.0",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
@@ -36,6 +37,7 @@
     "swiper": "^11.2.10",
     "tailwind-merge": "^3.3.1",
     "vaul": "^1.1.2",
+    "video.js": "^8.23.3",
     "zod": "^4.0.5",
     "zustand": "^5.0.6"
   },
