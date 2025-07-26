@@ -7,6 +7,24 @@ axios.defaults.headers.common["X-Application-Id"] =
 export const apiUrl = (url: string) =>
   `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000/v1"}/${url}`;
 
+export const setLoading  = (
+  message: string
+) => {
+  toast.loading(message,{
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+   });
+};
+export const dismissLoading  = () => {
+  toast.dismiss();
+};
 export const setToast = (
   message: string,
   type: "success" | "error" | "info" | "warning" = "success"
