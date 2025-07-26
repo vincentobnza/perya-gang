@@ -1,6 +1,5 @@
 "use client";
 
-import StreamingVideo from "@/components/Streaming-video";
 import React from "react";
 import GiveAwaySchedule from "../components/GiveAwaySchedule";
 import Leaderboard from "@/components/Leaderboard";
@@ -13,7 +12,7 @@ export default function Portal() {
   return (
     <div>
       <StreamingVideoDesktop />
-      <div className="space-y-10">
+      <div className="space-y-10 p-2">
         <main className="w-full flex flex-col items-start max-w-screen-xl mx-auto">
           <GiveAwaySchedule />
           {/* LEADERBOARD */}

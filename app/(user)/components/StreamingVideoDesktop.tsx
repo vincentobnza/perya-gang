@@ -24,7 +24,6 @@ export default function StreamingVideoDesktop() {
             {/* Video container - responsive width */}
             <div className="w-full lg:flex-1 relative">
               {/* COUNT ME IN BUTTON */}
-
               <CountMeInButton />
               <div className="border border-[#CC00FF] rounded ">
                 <div className=" aspect-video rounded overflow-hidden bg-zinc-900/20 border-2 border-[#CC00FF] relative">
@@ -87,15 +86,14 @@ export default function StreamingVideoDesktop() {
                   </div>
 
                   {/* MAIN BUTTONS */}
-
-                  <div className="absolute bottom-3 right-3 flex items-center gap-x-8">
-                    <div className="flex flex-col justify-center items-center gap-2 text-center z-20">
+                  <div className="absolute bottom-3 right-3 flex items-center gap-x-4 sm:gap-x-8">
+                    <div className="flex flex-col justify-center items-center gap-1 sm:gap-2 text-center z-20">
                       <Image
                         src="/ticket.svg"
                         alt="Ticket"
                         width={24}
                         height={24}
-                        className="w-6 h-6 cursor-pointer"
+                        className="w-5 h-5 sm:w-6 sm:h-6 cursor-pointer"
                       />
                       <p className="text-xs font-medium text-white">
                         Join Raffle
@@ -108,14 +106,14 @@ export default function StreamingVideoDesktop() {
                           "https://www.peryaplay.com/client/signup?locale=en"
                         );
                       }}
-                      className="flex flex-col justify-center items-center gap-2 text-center z-20"
+                      className="flex flex-col justify-center items-center gap-1 sm:gap-2 text-center z-20"
                     >
                       <Image
                         src="/coin.svg"
                         alt="Ticket"
                         width={24}
                         height={24}
-                        className="w-6 h-6 cursor-pointer"
+                        className="w-5 h-5 sm:w-6 sm:h-6 cursor-pointer"
                       />
                       <p className="text-xs font-medium text-white">Recharge</p>
                     </div>
@@ -124,7 +122,7 @@ export default function StreamingVideoDesktop() {
               </div>
             </div>
             {/* Chat sidebar - responsive dimensions */}
-            <div className="w-full lg:w-80 h-64 sm:h-80 md:h-96 lg:h-[531px]">
+            <div className="w-full lg:w-80 h-80 sm:h-96 md:h-[450px] lg:h-[531px]">
               <LiveComments />
             </div>
           </div>
@@ -139,12 +137,12 @@ export default function StreamingVideoDesktop() {
             height={50}
             className=" mb-4"
           />
-          <h2 className="text-white text-4xl font-semibold mt-4">
+          <h2 className="text-white text-2xl sm:text-3xl md:text-4xl font-semibold mt-4">
             Stream Offline
           </h2>
 
-          <p className="text-zinc-500 font-medium text-sm mt-4 text-center max-w-md">
-            Oops! The stream hasn’t started yet. <br /> Come back later or
+          <p className="text-zinc-500 font-medium text-sm mt-4 text-center max-w-md px-4">
+            Oops! The stream hasn't started yet. <br /> Come back later or
             explore other live events happening now.
           </p>
 
@@ -165,6 +163,29 @@ export default function StreamingVideoDesktop() {
 function LiveComments() {
   const [comments, setComments] = useState(LiveCommentsData);
   const [input, setInput] = useState("");
+  const [isAutoScroll, setIsAutoScroll] = useState(true);
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  const isScrollingRef = React.useRef(false);
+
+  const scrollToBottom = (smooth = true) => {
+    if (scrollContainerRef.current) {
+      const scrollContainer = scrollContainerRef.current;
+      scrollContainer.scrollTo({
+        top: scrollContainer.scrollHeight,
+        behavior: smooth ? "smooth" : "auto",
+      });
+    }
+  };
+
+  const handleScroll = () => {
+    if (isScrollingRef.current || !scrollContainerRef.current) return;
+
+    const scrollContainer = scrollContainerRef.current;
+    const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+    const isNearBottom = scrollHeight - scrollTop - clientHeight < 50;
+
+    setIsAutoScroll(isNearBottom);
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -173,88 +194,173 @@ function LiveComments() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
-    setComments([
-      ...comments,
-      {
-        id: `lc-${Date.now()}`,
-        avatar: "/default-avatar.png",
-        username: "You",
-        comment: input,
-      },
-    ]);
+
+    const newComment = {
+      id: `lc-${Date.now()}`,
+      avatar: "/default-avatar.png",
+      username: "You",
+      comment: input,
+    };
+
+    setComments((prev) => [...prev, newComment]);
     setInput("");
+
+    // Force scroll to bottom for new user messages
+    setIsAutoScroll(true);
+    setTimeout(() => {
+      scrollToBottom(true);
+    }, 50);
   };
 
+  // Auto-scroll effect for new comments
+  React.useEffect(() => {
+    if (isAutoScroll) {
+      scrollToBottom(false);
+    }
+  }, [comments, isAutoScroll]);
+
+  // Throttled scroll handler
+  React.useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
+    let ticking = false;
+    const throttledHandleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    scrollContainer.addEventListener("scroll", throttledHandleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      scrollContainer.removeEventListener("scroll", throttledHandleScroll);
+    };
+  }, []);
+
   return (
-    <div className="w-full h-full bg-zinc-900/50 rounded backdrop-blur-sm border border-zinc-800 flex flex-col">
+    <div className="w-full h-full bg-zinc-900/50 rounded backdrop-blur-sm border border-zinc-800 flex flex-col overflow-hidden">
       {/* Hall of Loaders Header - responsive padding */}
-      <div className="p-2 md:p-4 border-b border-zinc-800">
+      <div className="p-3 sm:p-4 border-b border-zinc-800 flex-shrink-0">
         <HallOfLoaders />
       </div>
 
       {/* Comments container with fixed fade - responsive spacing */}
-      <div className="relative flex-1 overflow-hidden">
+      <div className="relative flex-1 min-h-0 overflow-hidden">
         {/* Scrollable content */}
-        <div className="absolute inset-0 overflow-y-auto px-2 md:px-4 py-1 md:py-2 space-y-2 md:space-y-3 scrollbar-thin scrollbar-thumb-zinc-700">
+        <div
+          ref={scrollContainerRef}
+          className="absolute inset-0 overflow-y-auto px-3 sm:px-4 py-2 sm:py-3 space-y-2 sm:space-y-3 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent scroll-smooth"
+          onScroll={() => {
+            isScrollingRef.current = true;
+            clearTimeout(isScrollingRef.current as any);
+            (isScrollingRef.current as any) = setTimeout(() => {
+              isScrollingRef.current = false;
+            }, 150);
+          }}
+        >
           {comments.map((comment, i) => (
             <LiveCommentUserCard
               key={comment.id || i}
               avatar={comment.avatar}
               username={comment.username ?? ""}
               comment={comment.comment}
+              isCurrentUser={comment.username === "You"}
             />
           ))}
         </div>
 
-        {/* Top fade overlay - fixed syntax */}
-        <div className="pointer-events-none absolute top-0 left-0 w-full h-12 md:h-16 bg-gradient-to-b from-zinc-900/50 via-zinc-900/30 to-transparent z-10" />
+        {/* Scroll to bottom indicator */}
+        {!isAutoScroll && (
+          <div className="absolute bottom-16 sm:bottom-20 right-4 z-20">
+            <button
+              onClick={() => {
+                setIsAutoScroll(true);
+                scrollToBottom(true);
+              }}
+              className="w-8 h-8 bg-[#CC00FF] hover:bg-[#CC00FF]/80 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 animate-bounce"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-white"
+              >
+                <path d="m18 15-6-6-6 6" />
+              </svg>
+            </button>
+          </div>
+        )}
+
+        {/* Top fade overlay */}
+        <div className="pointer-events-none absolute top-0 left-0 w-full h-8 sm:h-12 bg-gradient-to-b from-zinc-900/50 via-zinc-900/30 to-transparent z-10" />
 
         {/* Bottom fade overlay */}
-        <div className="pointer-events-none absolute bottom-0 left-0 w-full h-12 md:h-16 bg-gradient-to-t from-zinc-900/50 via-zinc-900/30 to-transparent z-10" />
+        <div className="pointer-events-none absolute bottom-0 left-0 w-full h-8 sm:h-12 bg-gradient-to-t from-zinc-900/50 via-zinc-900/30 to-transparent z-10" />
       </div>
 
       {/* Input area - responsive layout */}
-      <div className="p-2 border-t border-zinc-800">
-        <form
-          onSubmit={handleSubmit}
-          className="flex items-center gap-1 md:gap-2"
-        >
+      <div className="p-2 sm:p-3 border-t border-zinc-800 flex-shrink-0">
+        <form onSubmit={handleSubmit} className="flex items-center gap-2">
           <input
             type="text"
             value={input}
             onChange={handleInputChange}
             placeholder="Type here..."
-            className="flex-1  bg-zinc-800/50 rounded-full placeholder:text-xs px-2 md:px-3 py-1.5 md:py-2 text-white placeholder-zinc-500 placeholder:font-semibold outline-none text-xs md:text-sm focus:ring-2 focus:ring-lime-500 transition-all duration-200 min-w-0"
+            className="flex-1 bg-zinc-800/50 rounded-full placeholder:text-xs px-3 py-2 text-white placeholder-zinc-500 placeholder:font-semibold outline-none text-xs sm:text-sm focus:ring-2 focus:ring-lime-500 transition-all duration-200 min-w-0"
           />
 
-          {/* Action buttons - responsive layout */}
-          <div className="flex items-center gap-1 md:gap-4 flex-shrink-0">
-            <div className="w-7 h-7 grid place-items-center rounded-full bg-[#CC00FF]">
-              <Image
-                src="/send-plane.png"
-                alt="Paper Plane"
-                width={16}
-                height={16}
-              />
-            </div>
+          {/* Send button - always visible */}
+          <button
+            type="submit"
+            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-[#CC00FF] flex-shrink-0 hover:bg-[#CC00FF]/80 transition-colors"
+          >
+            <Image
+              src="/send-plane.png"
+              alt="Send"
+              width={16}
+              height={16}
+              className="w-4 h-4"
+            />
+          </button>
 
-            {/* Mobile-only compact buttons */}
-            <div className="sm:hidden flex items-center gap-1">
+          {/* Mobile-only compact action buttons */}
+          <div className="flex items-center gap-2 sm:hidden">
+            <button
+              type="button"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-zinc-700/50 hover:bg-zinc-700 transition-colors"
+            >
               <Image
                 src="/ticket.svg"
                 alt="Join Raffle"
-                width={18}
-                height={18}
-                className="w-4 h-4 cursor-pointer"
+                width={16}
+                height={16}
+                className="w-4 h-4"
               />
+            </button>
+            <button
+              type="button"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-zinc-700/50 hover:bg-zinc-700 transition-colors"
+            >
               <Image
                 src="/coin.svg"
                 alt="Recharge"
-                width={18}
-                height={18}
-                className="w-4 h-4 cursor-pointer"
+                width={16}
+                height={16}
+                className="w-4 h-4"
               />
-            </div>
+            </button>
           </div>
         </form>
       </div>
@@ -267,25 +373,46 @@ const LiveCommentUserCard = ({
   avatar,
   username,
   comment,
+  isCurrentUser = false,
 }: {
   avatar: string;
   username: string;
   comment: string;
+  isCurrentUser?: boolean;
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  React.useEffect(() => {
+    // Animate new comments
+    const timer = setTimeout(() => setIsVisible(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="flex items-start gap-2 md:gap-3">
+    <div
+      className={`flex items-start gap-2 sm:gap-3 transition-all duration-300 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+      } ${isCurrentUser ? "bg-zinc-800/30 -mx-2 px-2 py-1 rounded-lg" : ""}`}
+    >
       <img
         src={avatar}
         alt="User Avatar"
-        className="w-6 h-6 md:w-8 md:h-8 rounded-full object-cover flex-shrink-0"
+        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover flex-shrink-0"
       />
       <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-1 mb-0.5 md:mb-1">
-          <span className="text-zinc-500 text-[9px] md:text-[10px] font-bold truncate">
+        <div className="flex items-center gap-1 mb-0.5">
+          <span
+            className={`text-xs sm:text-sm font-bold truncate ${
+              isCurrentUser ? "text-[#CC00FF]" : "text-zinc-500"
+            }`}
+          >
             @{username}
           </span>
+          {isCurrentUser && (
+            <span className="text-xs text-[#CC00FF] opacity-75">• You</span>
+          )}
         </div>
-        <p className="text-zinc-300text-xs md:text-[13px] break-words">
+        <p className="text-zinc-300 text-xs sm:text-sm break-words leading-relaxed">
           {comment}
         </p>
       </div>
@@ -317,46 +444,47 @@ const HallOfLoaders = () => {
   ];
 
   return (
-    <div className="space-y-2 md:space-y-3">
-      <div className="flex items-start gap-x-2">
+    <div className="space-y-2 sm:space-y-3">
+      <div className="flex items-center gap-x-2">
         <Image
           src="/sparkle.png"
           alt="Hall of Loaders Icon"
           width={16}
           height={16}
+          className="w-4 h-4 flex-shrink-0"
         />
-        <h3 className="text-zinc-200 font-bold text-xs md:text-sm">
+        <h3 className="text-zinc-200 font-bold text-xs sm:text-sm">
           Hall Of Loaders
         </h3>
       </div>
-      <div className="space-y-1 ">
+      <div className="space-y-1">
         {topLoaders.map((loader, index) => (
           <div
             key={index}
-            className={`w-full flex items-center p-2 rounded-sm justify-between gap-2 text-zinc-300 text-xs md:text-sm 
+            className={`w-full flex items-center p-2 rounded-sm justify-between gap-2 text-zinc-300 text-xs sm:text-sm 
               ${index === 0 ? "bg-lime-400/5" : index === 1 ? "bg-purple-400/10" : "bg-yellow-800/10"}
-              
-              `}
+            `}
           >
-            <div className="flex items-start space-x-3">
+            <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
               <Image
                 src={loader.rankIcon}
                 alt={`Rank ${index + 1}`}
-                width={24}
-                height={24}
+                width={20}
+                height={20}
+                className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"
               />
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 min-w-0">
                 <div
-                  className={`rounded-full ${index === 0 ? "border-2 border-lime-400 relative" : ""}`}
+                  className={`rounded-full relative flex-shrink-0 ${index === 0 ? "border-2 border-lime-400" : ""}`}
                 >
                   {index === 0 && (
                     <Image
                       src="/3d-crown.png"
                       alt="Crown"
-                      width={16}
-                      height={16}
-                      className="rounded-full absolute -top-3 -right-2 rotate-[30deg]"
+                      width={14}
+                      height={14}
+                      className="absolute -top-2.5 -right-1.5 rotate-[30deg] w-3.5 h-3.5"
                     />
                   )}
                   <Image
@@ -364,25 +492,25 @@ const HallOfLoaders = () => {
                     alt={`${loader.username} Avatar`}
                     width={24}
                     height={24}
-                    className="rounded-full"
+                    className="rounded-full w-6 h-6"
                   />
                 </div>
 
-                <span className="text-zinc-200 font-medium text-xs truncate">
+                <span className="text-zinc-200 font-medium text-xs truncate min-w-0">
                   @{loader.username}
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 flex-shrink-0">
               <Image
                 src="/diamond-coin.png"
                 alt="Coins"
-                width={16}
-                height={16}
+                width={14}
+                height={14}
+                className="w-3.5 h-3.5 sm:w-4 sm:h-4"
               />
-
-              <span className="text-yellow-500 font-bold text-xs mr-1 md:text-sm antialiased">
+              <span className="text-yellow-500 font-bold text-xs sm:text-sm">
                 {loader.coinsGained}
               </span>
             </div>
@@ -397,8 +525,8 @@ const HallOfLoaders = () => {
 const Header = () => {
   return (
     <div className="flex justify-between items-center gap-2">
-      <div className="flex items-center gap-2 md:gap-4 min-w-0 flex-1">
-        <Avatar className="size-8 flex-shrink-0">
+      <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
+        <Avatar className="w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">
           <AvatarImage
             src="/avatar3.png"
             alt="User Avatar"
@@ -406,7 +534,7 @@ const Header = () => {
           />
         </Avatar>
         <div className="flex flex-col gap-0.5 min-w-0 flex-1">
-          <h1 className="text-white font-bold text-base md:text-lg truncate">
+          <h1 className="text-white font-bold text-sm sm:text-base md:text-lg truncate">
             AkosiDogie
           </h1>
         </div>
@@ -416,15 +544,14 @@ const Header = () => {
 };
 
 // COUNT ME IN BUTTON, THIS BUTTON WILL POPUP IF STREAMER THROWS REWARD
-
 const CountMeInButton = () => {
   const isCountMeIn = true;
   return (
-    <div className="z-50 flex flex-col justify-center items-center gap-2 absolute -bottom-23 left-1/2 transform -translate-x-1/2">
+    <div className="z-50 flex flex-col justify-center items-center gap-2 absolute -bottom-20 sm:-bottom-23 left-1/2 transform -translate-x-1/2">
       <h1 className="text-sm font-medium">Be Fast!</h1>
       <button
-        className={`rounded-full font-bold py-2 px-4 shadow-lg transition-colors duration-200 ${
-          !isCountMeIn ? "bg-main" : "bg-zinc-700 border border-zinc-600 px-8"
+        className={`rounded-full font-bold py-2 px-4 sm:px-6 shadow-lg transition-colors duration-200 text-sm ${
+          !isCountMeIn ? "bg-main" : "bg-zinc-700 border border-zinc-600"
         }`}
       >
         {!isCountMeIn ? "Count Me In" : "Joined"}
@@ -461,9 +588,13 @@ const Timer = () => {
 
   return (
     <div className="flex flex-col gap-2 items-center text-center mx-auto">
-      <h4 className="text-sm font-bold text-zinc-500">Raffle Countdown</h4>
+      <h4 className="text-xs sm:text-sm font-bold text-zinc-500">
+        Raffle Countdown
+      </h4>
       {/* COUNTDOWN TIMER */}
-      <h1 className="text-4xl font-bold">{formatTime(secondsLeft)}</h1>
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+        {formatTime(secondsLeft)}
+      </h1>
     </div>
   );
 };
