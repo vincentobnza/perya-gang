@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 // Responsive StreamingVideo Component
 export default function StreamingVideoDesktop() {
   const isStreaming = true;
-
   const router = useRouter();
   return (
     <div className="mt-3 md:mt-5 lg:mt-8 mb-6 md:mb-14 w-full bg-zinc-950 relative px-3 md:px-0">
@@ -545,9 +544,11 @@ const Header = () => {
 
 // COUNT ME IN BUTTON, THIS BUTTON WILL POPUP IF STREAMER THROWS REWARD
 const CountMeInButton = () => {
-  const isCountMeIn = true;
+  const isCountMeIn = false;
   return (
-    <div className="z-50 flex flex-col justify-center items-center gap-2 absolute -bottom-20 sm:-bottom-23 left-1/2 transform -translate-x-1/2">
+    <div
+      className={`z-50 flex flex-col justify-center items-center gap-2 absolute -bottom-20 sm:-bottom-23 left-1/2 transform -translate-x-1/2`}
+    >
       <h1 className="text-sm font-medium">Be Fast!</h1>
       <button
         className={`rounded-full font-bold py-2 px-4 sm:px-6 shadow-lg transition-colors duration-200 text-sm ${
@@ -557,7 +558,7 @@ const CountMeInButton = () => {
         {!isCountMeIn ? "Count Me In" : "Joined"}
       </button>
 
-      <Timer />
+      {isCountMeIn ? <Timer /> : ""}
     </div>
   );
 };

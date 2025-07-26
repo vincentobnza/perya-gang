@@ -3,6 +3,7 @@ import RewardList from "./components/RewardList";
 import { Pause } from "lucide-react";
 import StreamingVideoDesktop from "@/app/(user)/components/StreamingVideoDesktop";
 import LiveStream from "./components/LiveStream";
+import ParticipantsTable from "../../components/ParticipantsTable";
 export default function CreateLive() {
   const isStreaming = false; // Replace with actual streaming state
   return (
@@ -23,6 +24,8 @@ export default function CreateLive() {
           </div>
         )}
         <RewardList />
+
+        <ParticipantsTable />
       </main>
     </div>
   );
