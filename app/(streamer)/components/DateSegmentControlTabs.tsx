@@ -1,17 +1,21 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+"use client";
 
-export function DateSegmentControlTabs() {
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+interface Props {
+  value: string;
+  onChange: (val: string) => void;
+}
+
+export function DateSegmentControlTabs({ value, onChange }: Props) {
   return (
     <div className="flex w-full max-w-sm flex-col gap-6">
-      <Tabs defaultValue="today">
+      <Tabs value={value} onValueChange={onChange}>
         <TabsList>
           <TabsTrigger value="today">Today</TabsTrigger>
-          <TabsTrigger value="tommorrow">Tommorrow</TabsTrigger>
+          <TabsTrigger value="tomorrow">Tomorrow</TabsTrigger>
           <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
         </TabsList>
-        <TabsContent value="today"></TabsContent>
-        <TabsContent value="tommorrow"></TabsContent>
-        <TabsContent value="upcoming"></TabsContent>
       </Tabs>
     </div>
   );
