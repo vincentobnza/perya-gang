@@ -52,7 +52,7 @@ export async function middleware(request: NextRequest) {
       balances: response.data.user_balance,
       token: Token.token,
     };
-
+    console.log("User authenticated:", user);
     axios.defaults.headers.common["X-Session-Token"] = user.token;
   } catch (err: any) {
     console.error("Auth check failed:", err);
@@ -84,7 +84,7 @@ export async function middleware(request: NextRequest) {
   if ((isStreamer || isLogin) && role !== "streamer") {
     return NextResponse.redirect(new URL("/portal", url));
   }
-
+  axios.defaults.headers.common["X-Session-Token"] = user.token;
   return NextResponse.next(); // Allow navigation
 }
 

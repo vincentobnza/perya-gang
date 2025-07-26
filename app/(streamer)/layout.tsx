@@ -5,6 +5,7 @@ import { Rethink_Sans } from "next/font/google";
 import { Metadata } from "next";
 import Footer from "../Footer";
 import { ToastContainer } from "react-toastify";
+import QueryProvider from "@/hooks/QueryProvider";
 
 const rethink = Rethink_Sans({
   variable: "--font-rethink-sans",
@@ -37,18 +38,20 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${rethink.className} antialiased gap-y-12 tracking-tight text-white bg-zinc-950 flex flex-col`}
-        >
-          <Navbar />
-          <main className="w-full flex-1 max-w-screen-xl mx-auto pb-5">
-            <ToastContainer />
-            {children}
-          </main>
-          <Footer />
-        </body>
-      </html>
+      <QueryProvider>
+        <html lang="en" suppressHydrationWarning>
+          <body
+            className={`${rethink.className} antialiased gap-y-12 tracking-tight text-white bg-zinc-950 flex flex-col`}
+          >
+            <Navbar />
+            <main className="w-full flex-1 max-w-screen-xl mx-auto pb-5">
+              <ToastContainer />
+              {children}
+            </main>
+            <Footer />
+          </body>
+        </html>
+      </QueryProvider>
     </>
   );
 }

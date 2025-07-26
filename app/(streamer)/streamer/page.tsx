@@ -5,8 +5,24 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Events from "../components/Events";
 import { CreateEvent } from "../components/CreateEvent";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { 
+  GetAllEvents 
+} from "@/app/api/streamer/event.c";
+
+
 
 export default function Page({}) {
+
+  const queryClient = useQueryClient()
+
+  const { data: events, isLoading: isLoadingEvents } = useQuery({
+    queryKey: ["events"],
+    queryFn: GetAllEvents
+  });
+
+  console.log("Events:", events);
+
   const rewards = null; // This should be replaced with actual data fetching logic
   return (
     <div>
